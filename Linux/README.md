@@ -1,3 +1,3 @@
 # NOTE:
-    It's coming soon for Linux / Unix systems.
-    Linux users are one of users they can use G3nius Tools !
+    It's came version 1.0.0 for Linux / UNIX systems.
+    But it's not have no more information. we are now writing this.
