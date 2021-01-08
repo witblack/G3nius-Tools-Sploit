@@ -1,2 +1,3 @@
 # NOTE:
-    It's coming soon for ARM CPUs model ( Like Android or Raspberry PI ).
+    It's came version 1.0.0 for Arm Cpus ( like android and Rasbperry PI systems )
+    But it's not have no more information. we are now writing this.
