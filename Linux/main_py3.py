@@ -101,7 +101,7 @@ for Name in List:
 		continue
 	try:
 		File = open(Location + '/plugins/' + Name + '/Title.txt','r')
-		Title = File.read()
+		Title = File.read().replace("\n",'') + "\n"
 		File.close()
 	except:
 		print(colored('[!] Failed to load "' + Name + '" plugin.','red'))
