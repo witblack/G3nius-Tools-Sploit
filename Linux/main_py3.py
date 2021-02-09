@@ -152,7 +152,7 @@ while True:
 					File = open(Location + '/plugins/' + Plugin[1] + '/main3.py','r')
 				except:
 					print(colored('Runing ' + Plugin[1] + ' failed !','red'))
-					print(colored('Becase "main.py" file in script folder not have read permission.','red'))
+					print(colored('Becase "main3.py" file in script folder not have read permission.','red'))
 				else:
 					Clear()
 					try:
