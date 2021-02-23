@@ -101,6 +101,9 @@ Also we have a wiki on <a href="https:///github.com">Github.com</a>. You can see
 # Donate us
 Thank you for donate hope to us
 
+Iranian meli bank:
+6037-9975-1855-6791 ( ملی - علی حسن زاده )
+
 BTC Wallet :
 17865b41-ec39-4798-a70d-242b14fa15dd
 
