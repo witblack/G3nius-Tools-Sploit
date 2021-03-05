@@ -8,8 +8,9 @@ try:
 	from termcolor import colored
 except:
 	print('[!] Failed to update. Some Deepends not installed.')
+	print("[+] Run 'pip install os requests shutil zipfile termcolor' to install.")
 	End()
-URL = 'https://bugzone.ir/Server/G3nius/'
+URL = 'https://bugzone.ir/Server/G3nius/Arm/'
 Clear()
 print(colored('[+] Checking update...','green'))
 try:
