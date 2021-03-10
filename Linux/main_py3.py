@@ -138,9 +138,11 @@ while True:
 			sleep(1)
 			continue
 		except:
+			Clear()
 			print(colored('Good by..', 'magenta'))
 			exit(0)
 	if Choose == Menu_Numebrs + 1:
+		Clear()
 		print(colored('Good by..', 'magenta'))
 		exit(0)
 	Find = False
@@ -186,9 +188,11 @@ while True:
 		try:
 			Choose = input(colored('[?] ', 'yellow') + colored(' Work finished. Do you want exit from script ? [y/n] ', 'white'))
 		except:
+			Clear()
 			print(colored('Good by..', 'magenta'))
 			exit(0)
 		if str.lower(Choose) == 'y' or str.lower(Choose) == 'yes' or str.lower(Choose) == 'exit':
+			Clear()
 			print(colored('Good by..', 'blue'))
 			exit(0)
 	else:

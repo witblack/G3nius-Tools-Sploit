@@ -3,7 +3,7 @@
 import os
 OS = None
 Location = os.path.dirname(os.path.abspath(__file__))
-Version = '1.0.0'
+Version = '1.0.1'
 if str.lower(os.name) == 'nt':
 	OS = 'Windows'
 elif str.lower(os.name) == 'posix':
