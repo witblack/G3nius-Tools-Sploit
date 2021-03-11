@@ -77,25 +77,25 @@ except:
 Name,Title,File,ID = None,None,None,0
 for Name in List:
 	ID += 1
-	if not os.path.exists(Location + '/plugins/' + Name + '/main3.py'):
-		if os.path.exists(Location + '/plugins/' + Name + '/main2.py'):
+	if not (os.path.isfile(Location + '/plugins/' + Name + '/main3.py') or os.path.isfile(Location + '/plugins/' + Name + '/main.py')):
+		if os.path.isfile(Location + '/plugins/' + Name + '/main2.py'):
 			print(colored('[!] Failed to load "' + Name + '" plugin.','yellow'))
 			print(colored("Becase it's writen for Python2 and you're using Python3.",'yellow'))
 		else:
 			print(colored('[!] Failed to load "' + Name + '" plugin.','red'))
-			print(colored('Becase "main2.py" or "main3.py" file in script folder not exists.','red'))
+			print(colored('Becase "main2.py" or "main3.py" or "main.py" file in script folder not exists.','red'))
 		ID -= 1
 		try:
-			sleep(1.5)
+			sleep(2.5)
 		except:
 			exit(0)
 		continue
-	if not os.path.exists(Location + '/plugins/' + Name + '/Title.txt'):
+	if not os.path.isfile(Location + '/plugins/' + Name + '/Title.txt'):
 		print(colored('[!] Failed to load "' + Name + '" plugin.','red'))
 		print(colored('Becase "Title.txt" file in script folder not exists.','red'))
 		ID -= 1
 		try:
-			sleep(1.5)
+			sleep(2.5)
 		except:
 			exit(0)
 		continue
@@ -108,18 +108,50 @@ for Name in List:
 		print(colored('Becase "Title.txt" file in script folder not have read permission.','red'))
 		ID -= 1
 		try:
-			sleep(3)
+			sleep(2.5)
 		except:
 			exit(0)
 		continue
-	File = open(Location + '/plugins/' + Name + '/main3.py','r')
-	try:
-		File.read()
-	except:
-		OpenSource = False
+	if os.path.isfile(Location + '/plugins/' + Name + '/main3.py'):
+		try:
+			File = open(Location + '/plugins/' + Name + '/main3.py',encoding="ISO-8859-1")
+			if File.read()[0:2] == '#!':
+				OpenSource = True
+			else:
+				OpenSource = False
+		except:
+			print(colored('[!] Failed to load "' + Name + '" plugin.','red'))
+			print(colored('Becase "main3.py" file in script folder not have read permission.','red'))
+			try:
+				File.close()
+			except:
+				pass
+			ID -= 1
+			try:
+				sleep(2.5)
+			except:
+				exit(0)
+			continue
 	else:
-		OpenSource = True
-	File.close()
+		try:
+			File = open(Location + '/plugins/' + Name + '/main.py',encoding="ISO-8859-1")
+			if File.read()[0:2] == '#!':
+				OpenSource = True
+			else:
+				OpenSource = False
+		except:
+			print(colored('[!] Failed to load "' + Name + '" plugin.', 'red'))
+			print(colored('Becase "main.py" file in script folder not have read permission.', 'red'))
+			try:
+				File.close()
+			except:
+				pass
+			ID -= 1
+			try:
+				sleep(2.5)
+			except:
+				exit(0)
+			continue
 	Plugins.append([ID,Name,Title,OpenSource])
 Menu_Numebrs = ID
 del Name,Title,ID,File,OpenSource
@@ -138,9 +170,11 @@ while True:
 			sleep(1)
 			continue
 		except:
+			Clear()
 			print(colored('Good by..', 'magenta'))
 			exit(0)
 	if Choose == Menu_Numebrs + 1:
+		Clear()
 		print(colored('Good by..', 'magenta'))
 		exit(0)
 	Find = False
@@ -148,47 +182,86 @@ while True:
 		if Plugin[0] == Choose:
 			Find = True
 			if Plugin[3]:
-				try:
-					File = open(Location + '/plugins/' + Plugin[1] + '/main3.py','r')
-				except:
-					print(colored('Runing ' + Plugin[1] + ' failed !','red'))
-					print(colored('Becase "main3.py" file in script folder not have read permission.','red'))
-				else:
-					Clear()
+				if os.path.isfile(Location + '/plugins/' + Plugin[1] + '/main3.py'):
 					try:
-						try:
-							exec(File.read())
-						except EndScript:
-							pass
-					except Exception as EX:
-						print(colored('Some where plugin get error! Failed job(s).','red'))
-						print(colored('Error:','red'))
-						print(colored(EX,'red'))
+						File = open(Location + '/plugins/' + Plugin[1] + '/main3.py','r')
 					except:
-						print(colored('Some where plugin get error! Failed job(s).','red'))
-					File.close()
-					del File
+						print(colored('Runing ' + Plugin[1] + ' failed !','red'))
+						print(colored('Becase "main3.py" file in script folder not have read permission.','red'))
+					else:
+						Clear()
+						try:
+							try:
+								exec(File.read())
+							except EndScript:
+								pass
+						except Exception as EX:
+							print(colored('Some where plugin get error! Failed job(s).','red'))
+							print(colored('Error:','red'))
+							print(colored(EX,'red'))
+						except:
+							print(colored('Some where plugin get error! Failed job(s).','red'))
+						File.close()
+						del File
+				else:
+					try:
+						File = open(Location + '/plugins/' + Plugin[1] + '/main.py','r')
+					except:
+						print(colored('Runing ' + Plugin[1] + ' failed !','red'))
+						print(colored('Becase "main3.py" file in script folder not have read permission.','red'))
+					else:
+						Clear()
+						try:
+							try:
+								exec(File.read())
+							except EndScript:
+								pass
+						except Exception as EX:
+							print(colored('Some where plugin get error! Failed job(s).','red'))
+							print(colored('Error:','red'))
+							print(colored(EX,'red'))
+						except:
+							print(colored('Some where plugin get error! Failed job(s).','red'))
+						File.close()
+						del File
 			else:
 				Clear()
-				try:
-					subprocess.call(Location + '/plugins/' + Plugin[1] + '/main3.py')
-				except Exception as EX:
-					if str(EX)[0:28] == '[Errno 8] Exec format error:':
-						print(colored("ERROR: This plugin not optimized for your CPU.",'red'))
-						print(colored("Check lastest update, May by i'ts Ok.",'red'))
-					else:
+				if os.path.isfile(Location + '/plugins/' + Plugin[1] + '/main3.py'):
+					try:
+						subprocess.call(Location + '/plugins/' + Plugin[1] + '/main3.py')
+					except Exception as EX:
+						if str(EX)[0:28] == '[Errno 8] Exec format error:':
+							print(colored("ERROR: This plugin not optimized for your CPU.",'red'))
+							print(colored("Check lastest update, May by i'ts Ok.",'red'))
+						else:
+							print(colored('Some where plugin get error! Failed job(s).','red'))
+							print(colored('Error:','red'))
+							print(colored(EX,'red'))
+					except:
 						print(colored('Some where plugin get error! Failed job(s).','red'))
-						print(colored('Error:','red'))
-						print(colored(EX,'red'))
-				except:
-					print(colored('Some where plugin get error! Failed job(s).','red'))
+				else:
+					try:
+						subprocess.call(Location + '/plugins/' + Plugin[1] + '/main.py')
+					except Exception as EX:
+						if str(EX)[0:28] == '[Errno 8] Exec format error:':
+							print(colored("ERROR: This plugin not optimized for your CPU.",'red'))
+							print(colored("Check lastest update, May by i'ts Ok.",'red'))
+						else:
+							print(colored('Some where plugin get error! Failed job(s).','red'))
+							print(colored('Error:','red'))
+							print(colored(EX,'red'))
+					except:
+						print(colored('Some where plugin get error! Failed job(s).','red'))
+			break
 	if Find:
 		try:
 			Choose = input(colored('[?] ', 'yellow') + colored(' Work finished. Do you want exit from script ? [y/n] ', 'white'))
 		except:
+			Clear()
 			print(colored('Good by..', 'magenta'))
 			exit(0)
 		if str.lower(Choose) == 'y' or str.lower(Choose) == 'yes' or str.lower(Choose) == 'exit':
+			Clear()
 			print(colored('Good by..', 'blue'))
 			exit(0)
 	else:

@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 # coding: utf-8
 import os
+import random
+import time
+from termcolor import colored
 OS = None
 Location = os.path.dirname(os.path.abspath(__file__))
-Version = '1.0.0'
+Version = '1.0.2'
+Type = 'ARM' # can be : ARM - Windows - Linux
 if str.lower(os.name) == 'nt':
 	OS = 'Windows'
 elif str.lower(os.name) == 'posix':
@@ -11,7 +15,7 @@ elif str.lower(os.name) == 'posix':
 else:
 	OS = ''
 	print(colored('[!] ', 'red') + colored('Your os not support, Sometimes it may be not working. Continue after 7 S..'))
-	sleep(7)
+	time.sleep(7)
 class EndScript(Exception):
 	pass
 def End():
