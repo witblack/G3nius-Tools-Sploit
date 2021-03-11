@@ -74,7 +74,7 @@ while True:
 		break
 	elif str.lower(Choose) == 'n' or str.lower(Choose) == 'no':
 		print(colored('[+] Update cancelled by user request.','yellow'))
-		del Size,MD5,Choose,URL
+		del Size,Choose,URL
 		End()
 	else:
 		print(colored('[!] Invalid Choose.','yellow'))
