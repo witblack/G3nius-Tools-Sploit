@@ -6,7 +6,7 @@ import time
 from termcolor import colored
 OS = None
 Location = os.path.dirname(os.path.abspath(__file__))
-Version = '1.0.3'
+Version = '1.0.4'
 Type = 'Linux' # can be : ARM - Windows - Linux
 if str.lower(os.name) == 'nt':
 	OS = 'Windows'
