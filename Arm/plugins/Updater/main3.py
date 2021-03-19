@@ -5,6 +5,7 @@ try:
 	import os
 	import shutil
 	import zipfile
+	from sys import exit
 	from termcolor import colored
 except:
 	print('[!] Failed to update. Some Deepends not installed.')
@@ -14,14 +15,18 @@ URL = 'https://bugzone.ir/Server/G3nius/Arm/'
 Clear()
 print(colored('[+] Checking update...','green'))
 try:
-	Last_version = str(requests.get(URL + 'Version.Version').content).replace('\n','')[2:-3]
-	Size = str(requests.get(URL + 'SizeFile.php').content).replace('\n','')[2:-3]
+	Last_version = requests.get(URL + 'Version.Version').content.decode('utf-8').replace("\n",'')
+	Size = requests.get(URL + 'SizeFile.php').content.decode('utf-8').replace("\n",'')
 except:
 	print(colored('[!] ','red') + colored('Failed to connect the server. Check your internet Connection.','yellow'))
 	End()
-if int(Size) / 1048576 > 1:
-	Size = str(round(int(Size) / 1048576,2)) + ' MB'
-elif int(Size) / 1024 > 1:
+if Size == '!502!':
+	print(colored("We're now working on server. New updates coming soon!",'yellow'))
+	print(colored("Try again 10 min later.",'yellow'))
+	End()
+if int(Size) / 1024 / 1024 >= 1:
+	Size = str(round(int(Size) / 1024 / 1024,2)) + ' MB'
+elif int(Size) / 1024 >= 1:
 	Size = str(round(int(Size) / 1024,2)) + ' KB'
 else:
 	Size = Size + ' Byte'
@@ -70,7 +75,7 @@ while True:
 			for file in files:
 				if file.endswith(".py"):
 					os.chmod(os.path.join(root, file),0o771)
-		print(colored('[+] Updating finished, Restart for use lastest version.','green'))
+		print(colored('[+] Updating finished, Restarting for use lastest version. Run again.','green'))
 		break
 	elif str.lower(Choose) == 'n' or str.lower(Choose) == 'no':
 		print(colored('[+] Update cancelled by user request.','yellow'))
@@ -81,3 +86,4 @@ while True:
 del Size,Choose,Content,URL,object,root,files,dirs,file,plugin,ListPlugins
 shutil.rmtree(Location + '/tmp')
 os.mkdir(Location + '/tmp')
+exit(0)
