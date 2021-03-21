@@ -154,6 +154,7 @@ for Name in List:
 			continue
 	Plugins.append([ID,Name,Title,OpenSource])
 Menu_Numebrs = ID
+Plugins.sort()
 del Name,Title,ID,File,OpenSource
 if len(Plugins) == 0:
 	print(colored('[!] ','red') + colored('No plugins were found health and available, So Exit.','yellow'))
