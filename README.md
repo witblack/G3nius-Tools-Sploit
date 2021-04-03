@@ -1,12 +1,12 @@
 # G3nius Tools <img src="http://i.imgur.com/Cj4rMrS.gif" height="40" alt="G3nius Tools" title="We Are G3nius !"/>
-G3nius tools is a powerfull Semi-open source ( Not free software ) hack and security tool with many lot of plugins. Also you can customize ( or write them and sell in market ) your plugins or use in app updater.
-It's just for showing advanced hacking and security weakness. <b>Not for damage to human rights.</b>
+G3nius tools is a powerful Semi-open source ( Not free-software , GNU License ) hack and security tool with lot of plugins. Also you can customize ( or write them and sell in market ) your plugins, It's have in app updater to easily usage.
+It's just for showing advanced hacking and security weakness. <b>Not for damaging human rights.</b>
 
 # First usage:
-G3nius Tools is a tool for hack and security. It's have a launcher for run plugins and connect deepends to them.
-For first use ( Premium or Normally version )  you need install python 2 or 3 and deepends on your System. But Operation systems is very diferint.
+G3nius Tools is a tool for hack and security. It's have a launcher for run plugins and connect dependency files to them.
+For first use ( Premium or Free version )  you need install python 2 or 3 and deepends on your System. But Operation systems is very different.
 
-      We are supporting Systems:
+      We're supporting Systems:
             - Linux
             - Windows
             - BSD
@@ -37,19 +37,18 @@ If you see your operation system in the list, for see installion and usage tool 
      
      
 If you think, See this is all of operating systems on world !
-We are trying hard to G3nius tools is safe , fast and soft installation and usage.
+We are trying hard for G3nius tools staying safe , fast and soft installation (url) on and usage.
 
 
 # Premium version
-also we have a premium version. It's Powerful with many lot of advanced plugins help you to be invincible.
-Plugins are installed on premium version was not installed on normally version.
+Also we have a premium version. It's Powerful with lot of advanced plugins help you to be invincible.
+Plugins are installed on premium version was not installed on free version.
 
 Premium plugins:
 
       - Wordpress user list finder ( Without brute force )
       - WP DDOS ( On Core Wordpress - Based on resource )
-      - Bluetooth Message ( without need accept request )
-      - Wifi Hacking without bruteforce or Handshake ( With man of the middle )
+      - Bluetooth DDOSer
       ...
 
 # How you can buy premium version ?
@@ -83,13 +82,13 @@ So you can use programming languages:
       .Net Core
       PHP
       Bash
-      ... ( And all of programmign language can be compile or run with execution file )      
+      ... ( And all of programming language can be compile or run with execution file )      
 
-2. If you want develop close source plugins, You should send a copy of source for us. It's only for ensure of users security.
+2. If you want develop close-source plugins, You should send a copy of source for us. It's only for ensure of users security.
 
 3. Your program shuild 'Title.txt' File. On this file should write title of your plugin.
 Your program shuild 'main2.py' or 'main3.py' File. This file will be run. When G3nius run on python2 will run 'main2.py' and when run on python3 run 'main3.py'.
-If your program is compiled set 'main2.py' and 'main3.py' name for them, It's will called.
+If your program is compiled set 'main.py' name for that. It's will called.
 
 4. Your plugin should not violate human rights law.
 You can read human rights on <a href="https://www.un.org/en/universal-declaration-human-rights/">here</a>.
