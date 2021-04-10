@@ -2,6 +2,12 @@
 G3nius tools is a powerful Semi-open source ( Not free-software , GNU License ) hack and security tool with lot of plugins. Also you can customize ( or write them and sell in market ) your plugins, It's have in app updater to easily usage.
 It's just for showing advanced hacking and security weakness. <b>Not for damaging human rights.</b>
 
+# Easily download
+Click on your operation system (are came at following linked text) to start download. Then create a empty directory and extract downloaded zipped file at same directory (Folder).<br/><br/>
+<a href="https://bugzone.ir/Server/G3nius/Lastest.zip" target="_blank"><button>Linux systems</button></a><br/>
+<a href="https://bugzone.ir/Server/G3nius/Windows/Lastest.zip" target="_blank"><button>Windows systems</button></a><br/>
+<a href="https://bugzone.ir/Server/G3nius/Arm/Lastest.zip" target="_blank"><button>Arm CPUs</button></a>
+
 # First usage:
 G3nius Tools is a tool for hack and security. It's have a launcher for run plugins and connect dependency files to them.
 For first use ( Premium or Free version )  you need install python 2 or 3 and deepends on your System. But Operation systems is very different.
