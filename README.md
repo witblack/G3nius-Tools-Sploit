@@ -4,9 +4,9 @@ It's just for showing advanced hacking and security weakness. <b>Not for damagin
 
 # Easily download
 Click on your operation system (are came at following linked text) to start download. Then create a empty directory and extract downloaded zipped file at same directory (Folder).<br/><br/>
-<a href="https://bugzone.ir/Server/G3nius/Lastest.zip" target="_blank"><button>Linux systems</button></a><br/>SHA256SUM: 214f90ca75521e77dbf6802a724b16d938f7fd7b57ac6764f4cb87a383a8e082<br/><br/>
-<a href="https://bugzone.ir/Server/G3nius/Windows/Lastest.zip" target="_blank"><button>Windows systems</button></a><br/>SHA256SUM: 9c9c6ff42a10e57d1126618d40bba90ea1f59dd638e8f3cf4022a30a3055eef6<br/><br/>
-<a href="https://bugzone.ir/Server/G3nius/Arm/Lastest.zip" target="_blank"><button>Arm CPUs</button></a><br/>SHA256SUM: 5e98a6e1a00a1a1682cbbafbf099e5ae5b7f171f14556244bf00e31734c5d8f9<br/><br/>
+<a href="https://bugzone.ir/Server/G3nius/Lastest.zip" target="_blank"><button>Linux systems</button></a><br/>
+<a href="https://bugzone.ir/Server/G3nius/Windows/Lastest.zip" target="_blank"><button>Windows systems</button></a><br/>
+<a href="https://bugzone.ir/Server/G3nius/Arm/Lastest.zip" target="_blank"><button>Arm CPUs</button></a>
 
 # First usage:
 G3nius Tools is a tool for hack and security. It's have a launcher for run plugins and connect dependency files to them.
