@@ -6,23 +6,24 @@ try:
 	import shutil
 	import zipfile
 	from sys import exit
-	from termcolor import colored
+	from colorama import Fore,Back,init
 except:
 	print('[!] Failed to update. Some Deepends not installed.')
-	print("[+] Run 'pip install os requests shutil zipfile termcolor' to install.")
+	print("[+] Run 'pip install os requests shutil zipfile colorama' to install.")
 	End()
+init()
 URL = 'https://bugzone.ir/Server/G3nius/Windows/'
 Clear()
-print(colored('[+] Checking update...','green'))
+print(Fore.GREEN + '[+] Checking update...')
 try:
 	Last_version = requests.get(URL + 'Version.Version').content.decode('utf-8').replace("\n",'')
 	Size = requests.get(URL + 'SizeFile.php').content.decode('utf-8').replace("\n",'')
 except:
-	print(colored('[!] ','red') + colored('Failed to connect the server. Check your internet Connection.','yellow'))
+	print(Fore.YELLOW + '[!] Failed to connect the server. Check your internet Connection.')
 	End()
 if Size == '!502!':
-	print(colored("We're now working on server. New updates coming soon!",'yellow'))
-	print(colored("Try again 10 min later.",'yellow'))
+	print(Fore.YELLOW + "We're now working on server. New updates coming soon!")
+	print(Fore.YELLOW + "Try again 10 min later.")
 	End()
 if int(Size) / 1024 / 1024 >= 1:
 	Size = str(round(int(Size) / 1024 / 1024,2)) + ' MB'
@@ -31,7 +32,7 @@ elif int(Size) / 1024 >= 1:
 else:
 	Size = Size + ' Byte'
 if Version == Last_version:
-	print(colored("[+] You're now using last version.",'green'))
+	print(Fore.GREEN + "[+] You're now using last version.")
 	del Last_version,Size,URL
 	End()
 else:
@@ -39,29 +40,29 @@ else:
 Clear()
 Choose = None
 while True:
-	Choose = input(colored('[?] ','yellow') + colored('Need to download ' + Size + ', Confirm and update [y/n] ?  ','white'))
+	Choose = input(Fore.YELLOW + '[?] ' + Fore.WHITE + 'Need to download ' + Size + ', Confirm and update [y/n] ? ')
 	if str.lower(Choose) == 'y' or str.lower(Choose) == 'yes':
-		print(colored('[+] Downloading update...','green'))
+		print(Fore.GREEN + '[+] Downloading update...')
 		try:
 			Content = requests.get(URL + 'Lastest.zip').content
 		except:
-			print(colored('[!] Error: Your internet connection lost! Check your internet.','red'))
+			print(Fore.RED + '[!] Error: Your internet connection lost! Check your internet.')
 		File = open(Location + '/tmp/UPDATE.zip','wb')
 		File.write(Content)
 		File.close()
-		print(colored('[+] Extracting update file...','green'))
+		print(Fore.GREEN + '[+] Extracting update file...')
 		File = zipfile.ZipFile(Location + '/tmp/UPDATE.zip', 'r')
 		File.extractall(Location + '/tmp/TMP_UPDATE')
-		print(colored('[+] Checking installed plugins...','green'))
+		print(Fore.GREEN + '[+] Checking installed plugins...')
 		shutil.move(Location + '/tmp/TMP_UPDATE/plugins',Location + '/tmp/')
-		print(colored('[+] Updating core...','green'))
+		print(Fore.GREEN + '[+] Updating core...')
 		for object in os.listdir(Location + '/tmp/TMP_UPDATE/'):
 			if os.path.isdir(Location + '/' + object) and object != 'tmp':
 				shutil.rmtree(Location + '/' + object)
 			elif os.path.isfile(Location + '/' + object):
 				os.remove(Location + '/' + object)
 			shutil.move(Location + '/tmp/TMP_UPDATE/' + object, Location + '/' + object)
-		print(colored('[+] Updating supported plugins...','green'))
+		print(Fore.GREEN + '[+] Updating supported plugins...')
 		ListPlugins = os.listdir(Location + '/tmp/plugins')
 		for plugin in ListPlugins:
 			if os.path.isdir(Location + '/plugins/' + plugin):
@@ -69,20 +70,20 @@ while True:
 			elif os.path.isfile(Location + '/plugins/' + plugin):
 				os.rename(Location + '/plugins/' + plugin,Location + '/plugins/' + plugin + '~')
 			shutil.move(Location + '/tmp/plugins/' + plugin, Location + '/plugins/' + plugin)
-		print(colored('Plugins updated: ','white') + colored(ListPlugins,'green'))
-		print(colored('[+] Repair access files...','green'))
+		print(Fore.WHITE + 'Plugins updated: ' + Fore.GREEN + ListPlugins)
+		print(Fore.GREEN + '[+] Repair access files...')
 		for root, dirs, files in os.walk(Location):
 			for file in files:
 				if file.endswith(".py"):
 					os.chmod(os.path.join(root, file),0o771)
-		print(colored('[+] Updating finished, Restarting for use lastest version. Run again.','green'))
+		print(Fore.GREEN + '[+] Updating finished, Restarting for use lastest version. Run again.')
 		break
 	elif str.lower(Choose) == 'n' or str.lower(Choose) == 'no':
-		print(colored('[+] Update cancelled by user request.','yellow'))
+		print(Fore.YELLOW + '[+] Update cancelled by user request.')
 		del Size,Choose,URL
 		End()
 	else:
-		print(colored('[!] Invalid Choose.','yellow'))
+		print(Fore.YELLOW + '[!] Invalid Choose.')
 del Size,Choose,Content,URL,object,root,files,dirs,file,plugin,ListPlugins
 shutil.rmtree(Location + '/tmp')
 os.mkdir(Location + '/tmp')
