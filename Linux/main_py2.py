@@ -9,7 +9,7 @@ try:
 	from time import sleep
 except:
 	print('[!] Some deepends not installed.')
-	print('Run "pip install sys os termcolor time"')
+	print('Run "pip install -r requires.txt"')
 	exit(1)
 try:
 	execfile(os.path.dirname(os.path.abspath(__file__)) + '/lib/functionsPyTwo.py')
@@ -54,9 +54,9 @@ def Clear():
 	print(colored('|','red') + colored(' Information :                  ','white') + colored('|','red') + colored(' ███████                 █           ','magenta') + colored('|','red'))
 	print(colored('|','red') + colored('--------------------------------','red') + colored('|','red') + colored('    █                    █           ','magenta') + colored('|','red'))
 	print(colored('|','red') + colored(' Python Version: ','blue') + colored('2              ','white') + colored('|','red') + colored('    █     ███    ███     █    ▒███▒  ','magenta') + colored('|','red'))
-	print(colored('|','red') + colored(" VERSION ",'blue') + colored(Version + '                  ','white') + colored('|','red') + colored('    █    █▓ ▓█  █▓ ▓█    █    █▒ ░█  ','magenta') + colored('|','red'))
-	print(colored('|','red') + colored(' OS: ','blue') + colored(tmp_OS + '			 ','white') + colored('|','red') + colored('    █    █   █  █   █    █    █▒░    ','magenta') + colored('|','red'))
-	print(colored('|','red') + colored('                                ','white') + colored('|','red') + colored('    █    █   █  █   █    █    ░███▒  ','magenta') + colored('|','red'))
+	print(colored('|','red') + colored(' LICENSE: ','blue') + colored(FixSpase(License,22),'white') + colored('|','red') + colored('    █    █▓ ▓█  █▓ ▓█    █    █▒ ░█  ','magenta') + colored('|','red'))
+	print(colored('|','red') + colored(' VERSION: ','blue') + colored(FixSpase(Version,22),'white') + colored('|','red') + colored('    █    █   █  █   █    █    █▒░    ','magenta') + colored('|','red'))
+	print(colored('|','red') + colored(' OS: ','blue') + colored(FixSpase(tmp_OS,27),'white') + colored('|','red') + colored('    █    █   █  █   █    █    ░███▒  ','magenta') + colored('|','red'))
 	print(colored('|','red') + colored('                                ','white') + colored('|','red') + colored('    █    █   █  █   █    █       ▒█  ','magenta') + colored('|','red'))
 	print(colored('|','red') + colored('                                ','white') + colored('|','red') + colored('    █    █▓ ▓█  █▓ ▓█    █░   █░ ▒█  ','magenta') + colored('|','red'))
 	print(colored('|','red') + colored('                                ','white') + colored('|','red') + colored('    █     ███    ███     ▒██  ▒███▒  ','magenta') + colored('|','red'))
