@@ -36,7 +36,7 @@ If you see your operation system in the list, for see installion and usage tool 
                   - Windows Servres ( Windows Server 2000 , Windows Server 2016 , ... )
             
             - ARM CPUs version:
-                  - Android ( Android 5 , Android 8 , Android 10 , ... )
+                  - Android (termux , Android Versions +5 , ... )
                   - Rasbeppery Pi ( Raspbian , Debian Arm , ... )
                   - Rrduino Boards
                   - Windows phone ( Windows Phone 7 , Windows Phone 8 , Windows Phone 10 , ... )
