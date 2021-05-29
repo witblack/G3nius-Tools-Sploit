@@ -29,11 +29,13 @@ else:
                 os.system('chmod 0755 /bin/g3nius-tools')
             except:
                 print('\x1b[0;31mError:')
-                print(" Can't install, Please run this file with root permission.\x1b[0m")
+                print("     Can't install, Please run this file with root permission.\x1b[0m")
             else:
                 print('\x1b[0;32m[+] \x1b[0m\x1b[0;38mInstalled successfully. Reopen your terminal.\x1b[0m')
                 print('\n\x1b[0;33mNOTE:\x1b[0m')
                 print("\x1b[0;34m   Installion files don't should be delete or move.")
+                print("   If your G3nius-tools have bug please end E-Mail to us:\n      admin@BugZone.ir")
+                print("   If your bug not fixed yet, Update to lastest version or redownload files and reinstall.")
                 print("   \x1b[0m\x1b[0;35mg3nius-tools\x1b[0m\x1b[0;34m command will be called here.\x1b[0m\n")
                 print("   run ./install-uninstall.py -h to see more information.\n")
         else:
@@ -50,7 +52,7 @@ else:
                 os.remove('/bin/g3nius-tools')
             except:
                 print('\x1b[0;31mError:')
-                print(" Can't uninstall, Please run this file with root permission.\x1b[0m")
+                print("     Can't uninstall, Please run this file with root permission.\x1b[0m")
             else:
                 print('\x1b[0;32mG3nius-tools uninstalled successfully!\x1b[0m')
                 print("\n\x1b[0;33mWe're sorry we could not keep you satisfied :(")
