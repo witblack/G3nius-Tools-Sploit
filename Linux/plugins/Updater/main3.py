@@ -86,4 +86,3 @@ while True:
 del Size,Choose,Content,URL,object,root,files,dirs,file,plugin,ListPlugins
 shutil.rmtree(Location + '/tmp')
 os.mkdir(Location + '/tmp')
-exit(0)
