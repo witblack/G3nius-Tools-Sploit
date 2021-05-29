@@ -1,8 +1,2 @@
-shutil
-subprocess
-sys
-os
-time
 termcolor
 requests
-zipfile
