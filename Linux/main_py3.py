@@ -70,8 +70,6 @@ def Clear():
 	print(colored('| Warning:','red') + colored(" Don't break or kill script while process runing.            ",'yellow') + colored('|','red'))
 	print(colored('|______________________________________________________________________|\n','red'))
 	del tmp_OS
-
-
 def Generate_Menu(Plugin_List):
 	ret = colored('Select Once:\n\n','white')
 	for Plugin in Plugin_List:
@@ -347,10 +345,20 @@ while True:
 			continue
 		except:
 			Clear()
+			if os.path.isdir(Location + '/tmp'):
+				shutil.rmtree(Location + '/tmp')
+			elif os.path.isfile(Location + '/tmp'):
+				os.remove(Location + '/tmp')
+			os.mkdir(Location + '/tmp')
 			print(colored('Good by..', 'magenta'))
 			exit(0)
 	if Choose == Menu_Numebrs + 1:
 		Clear()
+		if os.path.isdir(Location + '/tmp'):
+			shutil.rmtree(Location + '/tmp')
+		elif os.path.isfile(Location + '/tmp'):
+			os.remove(Location + '/tmp')
+		os.mkdir(Location + '/tmp')
 		print(colored('Good by..', 'magenta'))
 		exit(0)
 	Find = False
@@ -434,10 +442,20 @@ while True:
 			Choose = input(colored('[?] ', 'yellow') + colored(' Work finished. Do you want exit from script ? [y/n] ', 'white'))
 		except:
 			Clear()
+			if os.path.isdir(Location + '/tmp'):
+				shutil.rmtree(Location + '/tmp')
+			elif os.path.isfile(Location + '/tmp'):
+				os.remove(Location + '/tmp')
+			os.mkdir(Location + '/tmp')
 			print(colored('Good by..', 'magenta'))
 			exit(0)
 		if str.lower(Choose) == 'y' or str.lower(Choose) == 'yes' or str.lower(Choose) == 'exit':
 			Clear()
+			if os.path.isdir(Location + '/tmp'):
+				shutil.rmtree(Location + '/tmp')
+			elif os.path.isfile(Location + '/tmp'):
+				os.remove(Location + '/tmp')
+			os.mkdir(Location + '/tmp')
 			print(colored('Good by..', 'blue'))
 			exit(0)
 	else:
