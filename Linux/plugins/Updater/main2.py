@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 # coding: utf-8
 try:
 	import requests
@@ -6,12 +6,11 @@ try:
 	import shutil
 	import zipfile
 	from sys import exit
-	from termcolor import colored
 except:
-	print('[!] Failed to update. Some Deepends not installed.')
-	print("[+] Run 'pip install os requests shutil zipfile termcolor' to install.")
+	print('\x1b[0;31m[!] Failed to update. Some Deepends not installed.')
+	print("[+] Run 'pip install os requests shutil zipfile' to install.\x1b[0m")
 	End()
-URL = 'https://bugzone.ir/Server/G3nius/'
+URL = 'https://api.BugZone.ir/G3nius/'
 Clear()
 print(colored('[+] Checking update...','green'))
 try:
@@ -46,6 +45,7 @@ while True:
 			Content = requests.get(URL + 'Lastest.zip').content
 		except:
 			print(colored('[!] Error: Your internet connection lost! Check your internet.','red'))
+			End()
 		File = open(Location + '/tmp/UPDATE.zip','wb')
 		File.write(Content)
 		File.close()
