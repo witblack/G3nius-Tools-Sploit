@@ -3,12 +3,10 @@
 import os
 import random
 import time
-from termcolor import colored
 
-# local varibles
 OS = None
 Location = os.path.dirname(os.path.abspath(__file__))
-Version = '1.0.6'
+Version = '1.0.7'
 Type = 'Linux' # can be : ARM - Windows - Linux
 License = 'FREE' # can be : FREE - PREMIUM
 
