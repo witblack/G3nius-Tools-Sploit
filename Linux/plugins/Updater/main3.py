@@ -4,11 +4,9 @@ try:
 	import requests
 	import os
 	import shutil
-	import zipfile
-	from sys import exit
 except:
 	print('\x1b[0;31m[!] Failed to update. Some Deepends not installed.')
-	print("[+] Run 'pip install os requests shutil zipfile' to install.\x1b[0m")
+	print("[+] Run 'pip install os requests shutil' to install.\x1b[0m")
 	End()
 URL = 'https://api.BugZone.ir/G3nius/'
 Clear()
@@ -50,8 +48,12 @@ while True:
 		File.write(Content)
 		File.close()
 		print(colored('[+] Extracting update file...','green'))
-		File = zipfile.ZipFile(Location + '/tmp/UPDATE.zip', 'r')
-		File.extractall(Location + '/tmp/TMP_UPDATE')
+		if 'UnZip' in os.popen('unzip -v').read():
+			os.popen('unzip "' + Location.replace('"','\\"') + '/tmp/UPDATE.zip" -d "' + Location.replace('"','\\"') + '/tmp/TMP_UPDATE"').read()
+		else:
+			print(colored('"unzip" command not installed. Run: ','red'))
+			print(colored('		apt install unzip','red'))
+			End()
 		print(colored('[+] Checking installed plugins...','green'))
 		shutil.move(Location + '/tmp/TMP_UPDATE/plugins',Location + '/tmp/')
 		print(colored('[+] Updating core...','green'))
