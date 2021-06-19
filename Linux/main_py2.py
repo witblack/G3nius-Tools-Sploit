@@ -75,6 +75,33 @@ def Generate_Menu(Plugin_List):
 	for Plugin in Plugin_List:
 		ret += colored(str(Plugin[0]),'green') + ' ' + colored(Plugin[2],'white')
 	return ret
+if not os.path.isfile(Location + '/lib/agree'):
+	while True:
+		Clear()
+		print(colored('You should agree terms and rules before using ','green') + colored('G3nius-Tools','magenta') + colored('.','green'))
+		print(colored('\nTerm and rules:','white'))
+		print(colored("	1. ",'magenta') + colored("It's a semi-open source app.\n\tYou can't copy and use source codes are used.",'cyan'))
+		print(colored("	2. ",'magenta') + colored("This app only for showing weakness of security and penetration test.\n\tYou don't should damage to other people. It's need for better world.",'cyan'))
+		print(colored("	3. ",'magenta') + colored("You don't should use cracked versions or try to reverse engineering.\n\tAlso we may be use some APIs,You don't should do any attacks on us.",'cyan'))
+		try:
+			choose = input(colored("\nDo you agree terms and rules, Type \"",'white') + colored('yes','green') + colored('" (type "q" to exit) ? ','white'))
+		except:
+			print(colored("\nExit with user request.",'yellow'))
+			sys.exit(0)
+		else:
+			if choose.lower() == 'q' or choose.lower() == 'exit':
+				print(colored("\nExit with user request.",'yellow'))
+				sys.exit(0)
+			elif choose.lower() == 'yes':
+				try:
+					open(Location + '/lib/agree','w').close()
+				except:
+					print(colored("Can't create file! check access of folder.",'red'))
+					sys.exit(1)
+				break
+			else:
+				print(colored('Type "yes" to agree.','red'))
+				sleep(1)
 if len(sys.argv) > 1:
 	Exit_Code = 0
 	if '-p' in sys.argv or '--python' in sys.argv:
