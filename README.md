@@ -66,7 +66,7 @@ E-Mail : <a href="mailto:admin@bugzone.ir">admin@bugzone.ir</a><br/>
 WebSite : <a href="https://BugZone.ir">BugZone.ir</a><br/>
 
 
-# Public your plugin in G3nius Tools
+# Publish your plugin in G3nius Tools
 If you are programmer, You can publish your script in G3nius Tools. Also if you have very especially tool, You can sell it on G3nius market.<br/>
 If you have a public tool, login to your <a href="https://github.com">Github</a> account and send your tool as a pull request.<br/>
 And if you want sell your tool in market, Send information about your tool and what to do to us. My information is written in the bottom of page.
