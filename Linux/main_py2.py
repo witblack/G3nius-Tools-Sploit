@@ -21,7 +21,7 @@ except:
 try:
 	execfile(os.path.dirname(os.path.abspath(__file__)) + '/lib/functionsPyTwo.py')
 except:
-	print(colored('[!] Failed to load some some local libs.','red'))
+	print(colored('[!] Failed to load some local libs.','red'))
 	print(colored("If you're sure to don't change local files report it.",'red'))
 	print(colored('Email : admin@bugzone.ir','red'))
 	exit(1)
@@ -75,6 +75,21 @@ def Generate_Menu(Plugin_List):
 	for Plugin in Plugin_List:
 		ret += colored(str(Plugin[0]),'green') + ' ' + colored(Plugin[2],'white')
 	return ret
+def Exit_Request(Error_Code=0):
+	Clear()
+	try:
+		if os.path.isdir(Location + '/tmp'):
+			shutil.rmtree(Location + '/tmp')
+		elif os.path.isfile(Location + '/tmp'):
+			os.remove(Location + '/tmp')
+		os.mkdir(Location + '/tmp')
+	except:
+		print(colored('[!] ','red') + colored("Unable to clean tmp folder!",'yellow'))
+		print(colored('Good by..', 'magenta'))
+		sys.exit(1)
+	else:
+		print(colored('Good by..', 'magenta'))
+		sys.exit(Error_Code)
 if not os.path.isfile(Location + '/lib/agree'):
 	while True:
 		Clear()
@@ -85,7 +100,7 @@ if not os.path.isfile(Location + '/lib/agree'):
 		print(colored("	3. ",'magenta') + colored("You don't should use cracked versions or try to reverse engineering.\n\tAlso we may be use some APIs,You don't should do any attacks on us.",'cyan'))
 		try:
 			choose = input(colored("\nDo you agree terms and rules, Type \"",'white') + colored('yes','green') + colored('" (type "q" to exit) ? ','white'))
-		except:
+		except KeyboardInterrupt:
 			print(colored("\nExit with user request.",'yellow'))
 			sys.exit(0)
 		else:
@@ -352,32 +367,27 @@ if len(Plugins) == 0:
 print(colored('[ *** ] G3n!us started successfully.','green'))
 while True:
 	Clear()
-	print(Generate_Menu(Plugins) + colored(str(Menu_Numebrs + 1),'green') + colored(' Exit','white'))
+	print(Generate_Menu(Plugins) + colored(str(Menu_Numebrs + 1),'green') + colored(',','white') + colored('q','green') + colored(' Exit','white'))
 	try:
-		Choose = int(raw_input(colored('\n\nEnter your number: ','blue')))
-	except:
-		try:
-			print(colored('Invalid Choose','yellow'))
-			sleep(1)
-			continue
-		except:
-			Clear()
-			if os.path.isdir(Location + '/tmp'):
-				shutil.rmtree(Location + '/tmp')
-			elif os.path.isfile(Location + '/tmp'):
-				os.remove(Location + '/tmp')
-			os.mkdir(Location + '/tmp')
-			print(colored('Good by..', 'magenta'))
-			exit(0)
+		Choose = raw_input(colored('\n\n-={','cyan') + colored('Enter number ','green') + colored('~','red') + colored('>> ','magenta'))
+	except KeyboardInterrupt:
+		Exit_Request()
+	else:
+		Choose = Choose.lower()
+		if Choose == 'q' or Choose == 'exit':
+			Exit_Request()
+		else:
+			try:
+				Choose = int(Choose)
+			except:
+				print(colored('Invalid number!','yellow'))
+				try:
+					sleep(1)
+					continue
+				except KeyboardInterrupt:
+					Exit_Request()
 	if Choose == Menu_Numebrs + 1:
-		Clear()
-		if os.path.isdir(Location + '/tmp'):
-			shutil.rmtree(Location + '/tmp')
-		elif os.path.isfile(Location + '/tmp'):
-			os.remove(Location + '/tmp')
-		os.mkdir(Location + '/tmp')
-		print(colored('Good by..', 'magenta'))
-		exit(0)
+		Exit_Request()
 	Find = False
 	for Plugin in Plugins:
 		if Plugin[0] == Choose:
@@ -441,22 +451,8 @@ while True:
 		try:
 			Choose = raw_input(colored('[?] ', 'yellow') + colored(' Work finished. Do you want exit from script ? [y/n] ', 'white'))
 		except:
-			Clear()
-			if os.path.isdir(Location + '/tmp'):
-				shutil.rmtree(Location + '/tmp')
-			elif os.path.isfile(Location + '/tmp'):
-				os.remove(Location + '/tmp')
-			os.mkdir(Location + '/tmp')
-			print(colored('Good by..', 'magenta'))
-			exit(0)
+			Exit_Request()
 		if str.lower(Choose) == 'y' or str.lower(Choose) == 'yes' or str.lower(Choose) == 'exit':
-			Clear()
-			if os.path.isdir(Location + '/tmp'):
-				shutil.rmtree(Location + '/tmp')
-			elif os.path.isfile(Location + '/tmp'):
-				os.remove(Location + '/tmp')
-			os.mkdir(Location + '/tmp')
-			print(colored('Good by..', 'blue'))
-			exit(0)
+			Exit_Request()
 	else:
 		print(colored('Plugin not found!','red'))
