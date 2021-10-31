@@ -6,7 +6,7 @@ import time
 
 OS = None
 Location = os.path.dirname(os.path.abspath(__file__))
-Version = '1.1.5'
+Version = '1.1.6'
 Type = 'Linux' # can be : ARM - Windows - Linux
 License = 'FREE' # can be : FREE - PREMIUM
 
