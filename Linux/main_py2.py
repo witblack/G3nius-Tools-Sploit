@@ -19,10 +19,12 @@ except:
 		print('\x1b[0;31m[!] ERROR:    Internal and external libs dameged :(\x1b[0m')
 	exit(1)
 try:
+	execfile(os.path.dirname(os.path.abspath(__file__)) + '/lib/GeniusPowerLib/GPLpython2.py')
 	execfile(os.path.dirname(os.path.abspath(__file__)) + '/lib/functionsPyTwo.py')
-except:
+except Exception as Ex:
 	print(colored('[!] Failed to load some local libs.','red'))
 	print(colored("If you're sure to don't change local files report it.",'red'))
+	print("Exception:\t", Ex)
 	print(colored('Email : admin@bugzone.ir','red'))
 	exit(1)
 Location = os.path.dirname(os.path.abspath(__file__))
