@@ -1,5 +1,0 @@
-requests
-os
-shutil
-zipfile
-termcolor

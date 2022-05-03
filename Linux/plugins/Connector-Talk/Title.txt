@@ -1,1 +1,0 @@
-TCP/UDP send or recive data manually.
