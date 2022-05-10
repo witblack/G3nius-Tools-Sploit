@@ -24,12 +24,13 @@ from lib.GPL.File_Workers import gpl_write_to_file
 from lib.GPL.String_Workers import gpl_fix_string_to_uri
 
 """		check supporting OS		"""
-Check_Supported(Linux=True)
+if not Check_Supported(Linux=True):
+	Handler(Error_Levels.Failed_Job, "Only Linux users can use online Updater plugin!", "Download and reinstall new version of G3nius-Tools.")
 
 
 """		local varibles		"""
 URL = 'https://api.BugZone.ir/G3nius/'
-Plugin_Version = '2.0.5'
+Plugin_Version = '2.0.6'
 Location = G3nius_Location()
 
 # collect data from server
