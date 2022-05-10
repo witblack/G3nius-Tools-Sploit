@@ -66,12 +66,18 @@ try:
 	# load core main libs
 	from lib.core.main.Plugin_Launcher import Plugin_Launcher
 	from lib.core.main.Statistics import Send_Statistics
+	from lib.core.Check_Supported_OS import Check_Supported
+
+	# installers
+	from lib.core.installers.installer_uninstaller import Install_G3nius, Uninstall_G3nius
+	from lib.core.installers.check import Check_Installtion_G3nius
 
 	# load GPL libs
 	from lib.GPL.IO import gpl_input, gpl_sleep, gpl_confirm
 	from lib.GPL.File_Workers import gpl_read_from_file
 	from lib.GPL.String_Workers import gpl_fix_spases, gpl_fix_string_to_uri
 	from lib.GPL.Page_Managers import gpl_clear_and_banner, gpl_set_banner_verion, gpl_clear
+	from lib.GPL.Access_Managers import gpl_check_root_needed_with_error
 except Exception as EX:
 	exc_type, exc_obj, exc_tb = exc_info()
 	FileName = split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -135,6 +141,7 @@ try:
 
 	# checking if give parameters
 	if len(argv) > 1:
+		Delete_TMP_Folder = True
 		if '-h' in argv or '--help' in argv:
 			print(colored('HELP PAGE:', 'white'))
 			print(colored('\n	Parameters:', 'white'))
@@ -143,7 +150,8 @@ try:
 			print(colored('\n		-l ', 'green') + colored(',', 'magenta') + colored(' --list ', 'green') + colored('\n		Show list of plugins (Python 2 and 3).', 'blue'))
 			print(colored('\n		-u ', 'green') + colored(',', 'magenta') + colored(' --update ', 'green') + colored('\n		Update to lastest version.', 'blue'))
 			print(colored('\n		-i ', 'green') + colored(',', 'magenta') + colored(' --install ', 'green') + colored('\n		Install on your Linux system.', 'blue'))
-			print(colored('\n		-un ', 'green') + colored(',', 'magenta') + colored(' --uninstall ', 'green') + colored('\n		Uninstall from your Linux system.', 'blue'))
+			print(colored('\n		-un ', 'green') + colored(',', 'magenta') + colored(' --uninstall ', 'green') + colored('\n		Uninstall on your Linux system.', 'blue'))
+			print(colored('\n		-c ', 'green') + colored(',', 'magenta') + colored(' --check-install ', 'green') + colored('\n		Chcek installationon on your Linux system.', 'blue'))
 		elif '-l' in argv or '--list' in argv:
 			Handler(Error_Levels.NoStyle, colored('List of plugins:\n', 'white'))
 			Plugins_List = listdir(Location + '/plugins')
@@ -209,17 +217,25 @@ try:
 				Handler(Error_Levels.Critical, "Can't update, plugin crashed!", Clear_Page=False)
 			File.close()
 			del File, File_Address
-		elif ('-i' in argv or '--install' in argv) or ('-un' in argv or '--uninstall' in argv):
-			if ('-un' in argv or '--uninstall' in argv):
-				# uninstall
-				call('python3 "' + gpl_fix_string_to_uri(Location) + '/install-uninstall.py" -un')
-			else:
+		elif '-c' in argv or '--check' in argv or '-i' in argv or '--install' in argv or '-un' in argv or '--uninstall' in argv:
+			# check access & dont clean tmp
+			Delete_TMP_Folder = False
+			if not Check_Supported(Linux=True):
+				Handler(Error_Levels.Critical, "Only Linux users can install G3nius-Tools.", "It's not problem, Run on your system and use G3nius-Tools.")
+			gpl_check_root_needed_with_error(exit_code=Exit_Codes.CanNotExecute)
+			if '-i' in argv or '--install' in argv:
 				# install
-				call('python3 "' + gpl_fix_string_to_uri(Location) + '/install-uninstall.py" -i')
+				Install_G3nius()
+			elif '-un' in argv or '--uninstall' in argv:
+				# uninstall
+				Uninstall_G3nius()
+			else:
+				# check installation
+				Check_Installtion_G3nius()
 		else:
 			Handler(Error_Levels.High, 'Unknown parameter.', 'Use -h or --help to see all parameters.')
 			Exit_Request(Exit_Codes.InvalidArgument, clear_and_banner=False)
-		Exit_Request(Exit_Codes.Normal, clear_and_banner=False)
+		Exit_Request(Exit_Codes.Normal, clear_and_banner=False, clear_tmp_folder=Delete_TMP_Folder)
 
 	"""		get list of plugins		"""
 	# check directory exists
