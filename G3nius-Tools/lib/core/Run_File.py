@@ -12,12 +12,16 @@ def Run_File(file_address, subprocess_call=True):
     else:
         # run with g3nius-tools libs
         try:
-            exec('import ' + file_address)
+            __import__(file_address)
+            #exec('import ' + file_address)
         except:
-            # crash, return line number
             exc_type, exc_obj, exc_tb = exc_info()
             FileName = split(exc_tb.tb_frame.f_code.co_filename)[1]
-            Line_Number = exc_tb.tb_next.tb_next.tb_lineno
+            # crash, return line number
+            try:
+                Line_Number = exc_tb.tb_next.tb_next.tb_lineno
+            except:
+                Line_Number = 0
             del exc_type, exc_obj, exc_tb
             return [FileName, Line_Number]
         else:
