@@ -110,13 +110,13 @@ def gpl_while_input(title: str, list_of_chooses=[], text_color='magenta', number
     if exit_option:
         list_of_chooses.append(exit_option_text)
     while True:
-        gpl_clear()
+        gpl_clear_and_banner()
         print(colored(title, title_color))
         i = 0
         for option in list_of_chooses:
             i += 1
-            print("\t\t" + colored(str(i), number_color) + ' ' + colored(option, text_color))
-        choose = gpl_input(input_text, input_color)
+            print("\t" + colored(str(i), number_color) + ' ' + colored(option, text_color))
+        choose = gpl_input("\n" + input_text, input_color, clear_and_banner_before=False)
         try:
             choose = int(choose)
         except:
@@ -132,6 +132,7 @@ def gpl_while_input(title: str, list_of_chooses=[], text_color='magenta', number
             print(colored(on_exit_request_text, on_exit_request_forground_text_color))
             Exit_Request(Exit_Codes.Normal)
         else:
+            list_of_chooses.pop()
             return choose
 
 
