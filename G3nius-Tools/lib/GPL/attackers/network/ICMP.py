@@ -18,9 +18,12 @@ conf.verb = 0
 #
 # version
 # 1
-def gpl_icmp(ip, timeout=GPL_Config.ICMP_Timeout, TTL=GPL_Config.Default_TTL):
+def gpl_icmp(ip, timeout=GPL_Config.ICMP_Timeout, TTL=GPL_Config.Default_TTL, payload=None):
     try:
-        Answer, Unanswer = sr(IP(dst=ip, ttl=TTL) / ICMP(), timeout=timeout)
+        if payload != None:
+            Answer, Unanswer = sr(IP(dst=ip, ttl=TTL) / ICMP() / payload, timeout=timeout)
+        else:
+            Answer, Unanswer = sr(IP(dst=ip, ttl=TTL) / ICMP(), timeout=timeout)
         return [Answer, Unanswer]
     except:
         return None
