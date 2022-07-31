@@ -50,10 +50,10 @@ def gpl_random_string(Size,Chars=['0','1','2','3','4','5','6','7','8','9','A','a
 # use that's like:
 # "yours/uri"
 def gpl_fix_string_to_uri(URI, fix_for_without_double_quotation=False):
-    URI = URI.replace('\\', '\\\\')
-    Charecters = ['"', '!']
+    URI = URI.replace("\\", "\\\\")
+    Charecters = ['"', '!', '$', '`']
     for Charecter in Charecters:
-        URI = URI.replace(Charecter, "\\" + Charecter)
+        URI = URI.replace(Charecter, '\\' + Charecter)
     if fix_for_without_double_quotation:
         Charecters = ["'", '&', ';', '|', '(', ')', '%', '$', '*', '?', '>', '[', ']', '`']
         for Charecter in Charecters:
