@@ -30,7 +30,7 @@ try:
 	from threading import Thread
 	from subprocess import call
 
-	# dont needed at launcher.py
+	# don't needed at launcher.py
 	# just import to check installed or not
 	from requests import get
 	from importlib import reload
@@ -67,6 +67,7 @@ try:
 	from lib.core.main.Plugin_Launcher import Plugin_Launcher
 	from lib.core.main.Statistics import Send_Statistics
 	from lib.core.Check_Supported_OS import Check_Supported
+	from lib.core.main.Generate_Menu import Generate_Menu
 
 	# installers
 	from lib.core.installers.installer_uninstaller import Install_G3nius, Uninstall_G3nius
@@ -109,14 +110,6 @@ Clean_Temp_Dir()
 try:
 	"""		set version		"""
 	gpl_set_banner_verion(Main_Configs.Version)
-
-	"""		in app functions		"""
-	def Generate_Menu(Plugin_List):
-		ret = colored('Select Once:\n\n', 'white')
-		for Plugin in Plugin_List:
-			ret += colored("\n" + str(Plugin['ID']), 'green') + ' ' + colored(Plugin['Title'], 'white')
-		return ret
-
 
 	# terms and rules
 	if not isfile(Location + '/lib/agree'):
@@ -304,7 +297,7 @@ try:
 	while True:
 		gpl_set_banner_verion(Main_Configs.Version)
 		gpl_clear_and_banner()
-		Menu_String = Generate_Menu(Plugins) + colored("\n" + str(Menu_Numebrs + 1), 'green') + colored(',', 'white') + colored('q', 'green') + colored(' Exit', 'white')
+		Menu_String = Generate_Menu(Plugins, Menu_Numebrs)
 		print(Menu_String)
 		Choose = gpl_input(colored('\n\n-={', 'cyan') + colored('Enter number ', 'green') + colored('~', 'red') + colored('>> ', 'magenta'), dont_style=True, get_int=True, on_invalid_sleep_by_sec=Main_Configs.Sleep_When_Invalid_Plugin_Number, clear_and_banner_before=False, on_invalid_after_clear_text=Menu_String)
 		if Choose > Menu_Numebrs + 1 or Choose < 1:
