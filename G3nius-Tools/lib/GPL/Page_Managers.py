@@ -45,7 +45,7 @@ def gpl_clear(clear_on_unsuported_OS=True,on_unsuported_OS_text="New page is her
 #
 # version:
 # 1
-def gpl_clear_and_banner(owners_text='WitBlack',field2_title='',field2_text='',field3_title='',field3_text='',license='FREE'): # plugin_version shuild in globals
+def gpl_clear_and_banner(owners_text='WitBlack',field2_title='',field2_text='',field3_title='',field3_text='',license='FREE'): # Banner_Version shuild in globals
     global Banner_Version
     if not 'Banner_Version' in globals():
         raise Exception('Banner_Version not in globals. Run gpl_set_banner_verion first.')
