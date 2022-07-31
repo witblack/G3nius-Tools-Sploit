@@ -1,4 +1,5 @@
 """     libs    """
+# internal
 from os.path import exists, isfile, isdir
 from lib.GPL.IO import gpl_clear, gpl_input, gpl_sleep
 from lib.packages.termcolor import colored
@@ -6,6 +7,8 @@ import lib.config.Error_Levels as Error_Levels
 from lib.core.Error_Handler import Handler
 from lib.core.Exit_Request import Exit_Request
 import lib.config.Exit_Codes as Exit_Codes
+# external
+from os import remove, mkdir
 
 """     GPL     """
 
@@ -158,7 +161,7 @@ def gpl_ask_save_to_file(just_ask=False,bytes_to_write=b'',string_to_write='',is
 def gpl_read_from_file(File_Name, read_bytes=False, encoding='UTF-8', show_error=True, on_access_failed_text="Can't read file.", on_access_failed_description_text=None, on_access_failed_return_value=None, on_access_failed_exit_code=None, on_CTRL_C_return_value=None, on_CTRL_C_exit_code=None):
     try:
         if read_bytes:
-            file = open(File_Name, 'rb', encoding=encoding)
+            file = open(File_Name, 'rb')
         else:
             file = open(File_Name, 'r', encoding=encoding)
         Content = file.read()
@@ -190,6 +193,37 @@ def gpl_write_to_file(File_Name: str, Data, Mode='w', on_access_error_text="Can'
     except:
         if on_access_error_text:
             Handler(Error_Levels.High, on_access_error_text, on_accesss_error_text_description)
+        return False
+    else:
+        return True
+
+
+# remove file
+#
+# External:
+# from os import remove
+#
+# version
+# 1
+def gpl_remove_file(FileName):
+    try:
+        remove(FileName)
+    except:
+        return False
+    else:
+        return True
+
+# make directory
+#
+# External:
+# from os import mkdir
+#
+# version
+# 1
+def gpl_mkdir(Address):
+    try:
+        mkdir(Address)
+    except:
         return False
     else:
         return True
