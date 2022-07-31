@@ -1,4 +1,5 @@
 """     libs    """
+from re import match
 from time import sleep
 from ipaddress import ip_address
 from lib.packages.termcolor import colored
@@ -25,7 +26,7 @@ import lib.config.Error_Levels as Error_Levels
 #
 # version:
 # 1
-def gpl_input(text: str, dont_style=False, forground_color='white', clear_and_banner_before=True, on_invalid_after_clear_text=None, clear_before=False, on_exit_request_text='\nExit with user request.', on_exit_request_forground_color='yellow', q_to_exit=True, clear_and_banner_when_exit=True, clear_when_exit=False, get_int=False, get_float=False, get_ip=False, on_invalid_number_text='Invalid number!', on_invalid_sleep_by_sec=1, on_invalid_clear_and_banner=True, on_invalid_ip_text="Invalid IP!"):
+def gpl_input(text: str, dont_style=False, forground_color='white', clear_and_banner_before=True, on_invalid_after_clear_text=None, clear_before=False, on_exit_request_text='\nExit with user request.', on_exit_request_forground_color='yellow', q_to_exit=True, clear_and_banner_when_exit=True, clear_when_exit=False, get_int=False, get_float=False, get_ip=False, get_MAC=False, on_invalid_number_text='Invalid number!', on_invalid_sleep_by_sec=1, on_invalid_clear_and_banner=True, on_invalid_ip_text="Invalid IP!", on_invalid_mac_text="Invalid MAC!"):
     if clear_and_banner_before and (not clear_before):
         gpl_clear_and_banner()
     elif clear_before:
@@ -80,6 +81,16 @@ def gpl_input(text: str, dont_style=False, forground_color='white', clear_and_ba
                             print(on_invalid_after_clear_text)
                     else:
                         return choose
+                elif get_MAC:
+                    if match("^(?:[0-9A-Fa-f]{2}[:-]){5}(?:[0-9A-Fa-f]{2})$", choose):
+                        return choose
+                    else:
+                        Handler(Error_Levels.High, on_invalid_mac_text)
+                        gpl_sleep(on_invalid_sleep_by_sec)
+                        if on_invalid_clear_and_banner:
+                            gpl_clear_and_banner()
+                        if on_invalid_after_clear_text:
+                            print(on_invalid_after_clear_text)
                 else:
                     return choose
     except (KeyboardInterrupt, EOFError):
