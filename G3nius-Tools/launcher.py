@@ -106,7 +106,7 @@ Plugins = []
 """		clean tmp folder		"""
 Clean_Temp_Dir()
 
-"""		maange CTRL+C CTRL+D"""
+"""		manage CTRL+C CTRL+D	"""
 try:
 	"""		set version		"""
 	gpl_set_banner_verion(Main_Configs.Version)
@@ -183,10 +183,10 @@ try:
 						Soucrce_Code = gpl_read_from_file(File_Address)
 						if Soucrce_Code:
 							if Soucrce_Code[:len(Main_Configs.Include_G3nius_Libs_At_Plugin_Start_With)] == Main_Configs.Include_G3nius_Libs_At_Plugin_Start_With:
-								OpenSource = True
+								Import_G3nius = True
 							else:
-								OpenSource = False
-							Plugin_Launcher({'ID': 0, 'Name': Plugin_Name, 'Title': Title, 'File_Address': File_Address, 'OpenSource': OpenSource})
+								Import_G3nius = False
+							Plugin_Launcher({'ID': 0, 'Name': Plugin_Name, 'Title': Title, 'File_Address': File_Address, 'Import_G3nius': Import_G3nius})
 						else:
 							Handler(Error_Levels.Critical, "Can't read 'Title.txt' of '" + Plugin_Name + "' plugin!", 'Add read access to file.' ,False)
 					else:
