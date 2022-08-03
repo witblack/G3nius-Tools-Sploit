@@ -1,5 +1,5 @@
 """     G3nius core     """
-Version = '2.0.6'
+Version = '2.0.7'
 Type = 'Linux' # can be = ARM - Windows - Linux
 License = 'FREE' # can be = FREE - PREMIUM
 Sleep_On_Unknown_OS = 5
