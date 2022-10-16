@@ -1,0 +1,1 @@
+Default_Wrodlist = '/plugins/PageAdmin_Finder/admin-pages.lst'
