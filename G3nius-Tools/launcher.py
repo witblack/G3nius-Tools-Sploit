@@ -37,13 +37,14 @@ try:
 	from scapy.all import IP
 	from importlib import reload
 	from nmap import PortScanner
+	from psutil import Process
 except:
 	# failed to load external
 	try:
 		print(colored('[!] ', 'red') + colored('Some depends not installed.', 'yellow'))
-		print(colored('Run "pip install -r requires.txt"', 'blue'))
+		print(colored('Run as root/administrator: "pip install -r requires.txt"', 'blue'))
 	except:
-		print('\x1b[0;31m[!] ERROR:    Internal "termcolor" package dameged :(\x1b[0m')
+		print('\x1b[0;31m[!] ERROR:    Internal "termcolor" package damaged :(\x1b[0m')
 	exit(1)
 
 # load configs

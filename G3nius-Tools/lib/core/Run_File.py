@@ -1,8 +1,7 @@
 # libs
 from subprocess import call
-from sys import modules
-from sys import exc_info
-from os.path import split
+from sys import modules, exc_info
+from lib.core.End_Plugin import EndScript_Class
 
 # if crashed at import mode, return linenumber
 def Run_File(file_address, subprocess_call=True):
@@ -14,6 +13,10 @@ def Run_File(file_address, subprocess_call=True):
         try:
             __import__(file_address)
             #exec('import ' + file_address)
+        except EndScript_Class:
+            # Ended with End_Plugin
+            del modules[file_address]
+            return None
         except Exception as Ex:
             # finders functions
             def Find_Error_Line(exc_tb):
@@ -32,10 +35,6 @@ def Run_File(file_address, subprocess_call=True):
             # crash, return line number
             FileName = Find_Error_File(exc_tb)
             Line_Number = Find_Error_Line(exc_tb)
-            #try:
-            #    Line_Number = exc_tb.tb_next.tb_next.tb_lineno
-            #except:
-            #    Line_Number = 0
             del exc_type, exc_obj, exc_tb
             return [FileName, Line_Number, Ex]
         else:

@@ -15,7 +15,7 @@ def Plugin_Launcher(Plugin):
         # run source with g3nius-tools libs
         try:
             Crash_Details = Run_File('plugins.' + Plugin['Name'] + '.main', subprocess_call=False)
-        except EndScript_Class:
+        except (EndScript_Class, KeyError):
             return
         except (KeyboardInterrupt, EOFError):
             Handler(Error_Levels.Failed_Job, 'Plugin ended with user request.')

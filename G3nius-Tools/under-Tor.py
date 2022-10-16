@@ -5,7 +5,7 @@ try:
 	from os import system, popen
 	from os.path import basename, abspath
 except:
-	print("\x1b[0;31mSome Deepends not installed. run 'pip install -r requires.txt'\x1b[0m")
+	print("\x1b[0;31mSome Depends not installed. Run as root/administrator: 'pip install -r requires.txt'\x1b[0m")
 else:
 	if 'ProxyChains' in popen('proxychains').read():
 		system('proxychains ./launcher.py')
