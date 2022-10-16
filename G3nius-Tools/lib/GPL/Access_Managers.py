@@ -1,6 +1,6 @@
 """     libs        """
 # external
-from os import getuid
+import os, ctypes
 
 # internal
 from lib.core.Error_Handler import Handler
@@ -10,7 +10,11 @@ from lib.core.Exit_Request import Exit_Request
 
 """     GPL     """
 def gpl_check_is_root():
-    if getuid() == 0:
+    try:
+        Is_admin = os.getuid() == 0
+    except AttributeError:
+        Is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
+    if Is_admin:
         return True
     else:
         return False

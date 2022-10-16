@@ -12,7 +12,7 @@ from requests import get, post
 #
 # version
 # 1
-def gpl_http_get(URL, params={}, session=None, retry_to_get_valid_response_and_status_code=True, ok_http_codes=[], timeout=None, cookies={}, headers={}, on_timeout_text=None, on_invalid_http_code_retry_text=None):
+def gpl_http_get(URL, params={}, retry_on_503=True, session=None, retry_to_get_valid_response_and_status_code=True, ok_http_codes=[], timeout=None, cookies={}, headers={}, on_timeout_text=None, on_invalid_http_code_retry_text=None):
     while retry_to_get_valid_response_and_status_code:
         # once get
         try:
@@ -35,7 +35,11 @@ def gpl_http_get(URL, params={}, session=None, retry_to_get_valid_response_and_s
             return None
         else:
             if len(ok_http_codes) == 0 or response.status_code in ok_http_codes:
-                return response
+                # on 502 retry
+                if retry_on_503 and response.status_code != 503:
+                    return response
+                elif not retry_on_503:
+                    return response
             elif on_invalid_http_code_retry_text:
                 print(on_invalid_http_code_retry_text)
 
@@ -49,7 +53,7 @@ def gpl_http_get(URL, params={}, session=None, retry_to_get_valid_response_and_s
 #
 # version
 # 1
-def gpl_http_post(URL, payload={}, session=None, retry_to_get_valid_response_and_status_code=True, ok_http_codes=[], timeout=None, cookies={}, headers={}, on_timeout_text=None, on_invalid_http_code_retry_text=None):
+def gpl_http_post(URL, payload={}, retry_on_503=True, session=None, retry_to_get_valid_response_and_status_code=True, ok_http_codes=[], timeout=None, cookies={}, headers={}, on_timeout_text=None, on_invalid_http_code_retry_text=None):
     while retry_to_get_valid_response_and_status_code:
         # once get
         try:
@@ -72,6 +76,10 @@ def gpl_http_post(URL, payload={}, session=None, retry_to_get_valid_response_and
             return None
         else:
             if len(ok_http_codes) == 0 or response.status_code in ok_http_codes:
-                return response
+                # on 502 retry
+                if retry_on_503 and response.status_code != 503:
+                    return response
+                elif not retry_on_503:
+                    return response
             elif on_invalid_http_code_retry_text:
                 print(on_invalid_http_code_retry_text)

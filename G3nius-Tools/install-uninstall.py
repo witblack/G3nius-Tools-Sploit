@@ -14,6 +14,7 @@ try:
     # core
     from lib.core.Check_Supported_OS import Check_Supported
     from lib.core.G3nius_Location import G3nius_Location
+    from lib.core.main.Do_On_Startup import Startup
     from lib.core.Error_Handler import Handler
 
     # GPL
@@ -30,6 +31,7 @@ except ModuleNotFoundError:
     print('\x1b[0;31m[!] Some depends not installed.')
     print('Run "pip install -r requires.txt"\x1b[0m')
 else:
+    Startup()
     Check_Supported(Linux=True)
     gpl_check_root_needed_with_error(Exit_Codes.CanNotExecute)
     if '-h' in argv or '--help' in argv or len(argv) == 1:

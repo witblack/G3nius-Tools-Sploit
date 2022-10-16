@@ -1,5 +1,6 @@
 """     libs    """
 from random import choice
+from json import loads, dumps
 
 """     GPL     """
 
@@ -74,3 +75,32 @@ def gpl_convert_to_bytes(data):
         data = bytes(data)
     del typ
     return data
+
+
+
+# JSON Loader
+#
+# modules:
+# from json import loads
+#
+# version:
+# 1
+def gpl_JSON_loads(JSON_String):
+    try:
+        loads(JSON_String)
+    except:
+        return None
+
+
+# JSON Dumper
+#
+# modules:
+# from json import dumps
+#
+# version:
+# 1
+def gpl_JSON_dumps(JSON_String):
+    try:
+        dumps(JSON_String)
+    except:
+        return None

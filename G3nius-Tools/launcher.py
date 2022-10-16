@@ -23,18 +23,20 @@ try:
 	from lib.packages.termcolor import colored
 
 	# import external libs
+	from shutil import rmtree
+	from subprocess import call
+	from threading import Thread
+	from sys import argv, exc_info
 	from os.path import split, isdir, isfile
 	from os import remove, mkdir, listdir, system
-	from sys import argv, exc_info
-	from shutil import rmtree
-	from threading import Thread
-	from subprocess import call
 
 	# don't needed at launcher.py
 	# just import to check installed or not
+	from json import loads
 	from requests import get
-	from importlib import reload
 	from scapy.all import IP
+	from importlib import reload
+	from nmap import PortScanner
 except:
 	# failed to load external
 	try:
@@ -59,26 +61,27 @@ try:
 	from lib.core.OS_Detector import OS
 	from lib.core.Error_Handler import Handler
 	from lib.core.Exit_Request import Exit_Request
+	from lib.core.main.Do_On_Startup import Startup
 	from lib.core.G3nius_Location import G3nius_Location
 	from lib.core.main.Clean_Temp_Dir import Clean_Temp_Dir
 	from lib.core.End_Plugin import End_Plugin, EndScript_Class
 
 	# load core main libs
-	from lib.core.main.Plugin_Launcher import Plugin_Launcher
 	from lib.core.main.Statistics import Send_Statistics
-	from lib.core.Check_Supported_OS import Check_Supported
 	from lib.core.main.Generate_Menu import Generate_Menu
+	from lib.core.Check_Supported_OS import Check_Supported
+	from lib.core.main.Plugin_Launcher import Plugin_Launcher
 
 	# installers
-	from lib.core.installers.installer_uninstaller import Install_G3nius, Uninstall_G3nius
 	from lib.core.installers.check import Check_Installtion_G3nius
+	from lib.core.installers.installer_uninstaller import Install_G3nius, Uninstall_G3nius
 
 	# load GPL libs
-	from lib.GPL.IO import gpl_input, gpl_sleep, gpl_confirm
 	from lib.GPL.File_Workers import gpl_read_from_file
+	from lib.GPL.IO import gpl_input, gpl_sleep, gpl_confirm
+	from lib.GPL.Access_Managers import gpl_check_root_needed_with_error
 	from lib.GPL.String_Workers import gpl_fix_spases, gpl_fix_string_to_uri
 	from lib.GPL.Page_Managers import gpl_clear_and_banner, gpl_set_banner_verion, gpl_clear
-	from lib.GPL.Access_Managers import gpl_check_root_needed_with_error
 except Exception as EX:
 	exc_type, exc_obj, exc_tb = exc_info()
 	FileName = split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -90,12 +93,15 @@ except Exception as EX:
 	print(colored('Email : admin@bugzone.ir', 'blue'))
 	exit(Exit_Codes.Crash)
 
+"""		Do startup works	"""
+Startup()
+
 """		send statisctic usage		"""
 # NOTE:
 # This feature is optional and just for statistics.
 # You can set False to don't send reports.
 thread = Thread(target=Send_Statistics, args=(Main_Configs.Statistics_Reports,))
-thread.run()
+thread.start()
 del thread
 
 """		local varibles and detect OS		"""

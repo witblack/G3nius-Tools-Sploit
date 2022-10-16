@@ -23,11 +23,10 @@ def Plugin_Launcher(Plugin):
             Handler(Error_Levels.Failed_Job, "Plugin crashed! Can't find & say line number to you :(", str(EX))
         else:
             if Crash_Details != None:
-                if Crash_Details[1] == 0:
-                    Handler(Error_Levels.Failed_Job, "Failed to import " + G3nius_Location() + '/' + Crash_Details[0])
+                if Crash_Details[1] == 0 or Crash_Details[0] == 'Run_File.py':
+                    Handler(Error_Levels.Failed_Job, "Failed to import " + G3nius_Location() + '/' + Plugin['Name'] + '/main.py', str(Crash_Details[2]))
                 else:
-                    Handler(Error_Levels.Failed_Job, "Plugin crashed at: '" + G3nius_Location() + '/' + Crash_Details[0] + "' Line: " + str(Crash_Details[1]))
-
+                    Handler(Error_Levels.Failed_Job, "Plugin crashed at: '" + G3nius_Location() + '/' + Crash_Details[0] + "' Line: " + str(Crash_Details[1]), str(Crash_Details[2]))
     else:
         # close source
         try:

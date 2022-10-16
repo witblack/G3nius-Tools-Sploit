@@ -158,13 +158,23 @@ def gpl_ask_save_to_file(just_ask=False,bytes_to_write=b'',string_to_write='',is
 #
 # version
 # 1
-def gpl_read_from_file(File_Name, read_bytes=False, encoding='UTF-8', show_error=True, on_access_failed_text="Can't read file.", on_access_failed_description_text=None, on_access_failed_return_value=None, on_access_failed_exit_code=None, on_CTRL_C_return_value=None, on_CTRL_C_exit_code=None):
+def gpl_read_from_file(File_Name, read_bytes=False, read_lines=False, remove_newlines=True, encoding='UTF-8', show_error=True, on_access_failed_text="Can't read file.", on_access_failed_description_text=None, on_access_failed_return_value=None, on_access_failed_exit_code=None, on_CTRL_C_return_value=None, on_CTRL_C_exit_code=None):
     try:
         if read_bytes:
             file = open(File_Name, 'rb')
         else:
             file = open(File_Name, 'r', encoding=encoding)
-        Content = file.read()
+        if read_lines:
+            Lines = file.readlines()
+            if remove_newlines:
+                # remove \n end of lines
+                for i in range(0, len(Lines)):
+                    if Lines[i][-1] == "\n":
+                        Lines[i] = Lines[i][:-1]
+            Content = Lines
+            del Lines
+        else:
+            Content = file.read()
         file.close()
     except KeyboardInterrupt:
         if on_CTRL_C_exit_code:
