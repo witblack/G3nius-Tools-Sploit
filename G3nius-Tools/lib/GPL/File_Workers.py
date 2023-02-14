@@ -1,150 +1,89 @@
 """     libs    """
 # internal
-from os.path import exists, isfile, isdir
-from lib.GPL.IO import gpl_clear, gpl_input, gpl_sleep
-from lib.packages.termcolor import colored
+from lib.GPL.IO import gpl_input, gpl_sleep, gpl_confirm
 import lib.config.Error_Levels as Error_Levels
 from lib.core.Error_Handler import Handler
 from lib.core.Exit_Request import Exit_Request
-import lib.config.Exit_Codes as Exit_Codes
+from lib.GPL.Page_Managers import gpl_clear_and_banner
+
 # external
 from os import remove, mkdir
+from os.path import exists, isfile, isdir
+from shutil import rmtree
+
+# Configs
+import lib.config.Exit_Codes as Exit_Codes
 
 """     GPL     """
 
 # ask load from file
 #
-# modules:
-# import os
-# from termcolor import colored
-#
 # internal modules:
-# gpl_clear
+# gpl_clear_and_banner
 # gpl_input
 # gpl_sleep
 #
 # version:
-# 1
-def gpl_ask_load_from_file(just_ask=False,read_lines=False,read_content=False,read_bytes=False,ask_address_text='Enter address/name of file to load (q to exit): ',ask_address_text_color='white',on_file_not_exists_text='File not exists or not a file!',on_file_not_exists_text_color='red',on_file_not_exists_sleep_by_sec=1,on_file_not_have_enough_access_text='File not have enough access to read.',on_file_not_have_enough_access_text_color='red',on_file_not_have_enough_access_sleep_by_sec=1,on_file_is_dir_text="It's a directory. should be a file.",on_file_is_dir_text_color='red',on_file_is_dir_sleep_by_sec=1):
+# 2
+def gpl_ask_load_from_file(ask_address_text='Enter address/name of file to load (q to exit): ', just_ask=False, read_lines=False, read_content=False, read_bytes=False):
     while True:
-        gpl_clear()
-        address = gpl_input(ask_address_text,ask_address_text_color)
-        if not exists(address):
-            print(colored(on_file_not_exists_text,on_file_not_exists_text_color))
-            gpl_sleep(on_file_not_exists_sleep_by_sec)
-        elif isfile(address):
+        # Get URI from user
+        gpl_clear_and_banner()
+        FileName = gpl_input(ask_address_text)
+        if not exists(FileName):
+            # file not exists
+            Handler(Error_Levels.Failed_Job, 'File not exists or not a file!')
+            gpl_sleep()
+        elif isfile(FileName):
             if just_ask:
-                return address
+                return FileName
             elif read_content:
-                try:
-                    file = open(address,'r')
-                    data = file.read()
-                except:
-                    print(colored(on_file_not_have_enough_access_text,on_file_not_have_enough_access_text_color))
-                    gpl_sleep(on_file_not_have_enough_access_sleep_by_sec)
-                else:
-                    file.close()
-                    return data
+                return gpl_read_from_file(FileName)
             elif read_lines:
-                try:
-                    file = open(address,'r')
-                    data = file.readlines()
-                except:
-                    print(colored(on_file_not_have_enough_access_text,on_file_not_have_enough_access_text_color))
-                    gpl_sleep(on_file_not_exists_sleep_by_sec)
-                else:
-                    file.close()
-                    lst = []
-                    for item in data:
-                        if item[-1:] == "\n":
-                            lst.append(item[:-1])
-                        else:
-                            lst.append(item)
-                    return lst
+                return gpl_read_from_file(FileName, read_lines=True)
             elif read_bytes:
-                try:
-                    file = open(address,'rb')
-                    data = file.read()
-                except:
-                    print(colored(on_file_not_have_enough_access_text,on_file_not_have_enough_access_text_color))
-                    gpl_sleep(on_file_not_exists_sleep_by_sec)
-                else:
-                    file.close()
-                    return data
-        elif isdir(address):
-            print(colored(on_file_is_dir_text,on_file_is_dir_text_color))
-            gpl_sleep(on_file_is_dir_sleep_by_sec)
+                return gpl_read_from_file(FileName, read_bytes=True)
+        else:
+            # Selected URI is directory
+            Handler(Error_Levels.Failed_Job, "It's a directory. should be a file.")
+            gpl_sleep()
 
 
 
 # ask save to file
 #
-# modules:
-# import os
-#
 # internal modules:
 # gpl_input
 # gpl_clear
 # gpl_sleep
 #
 # version:
-# 1
-def gpl_ask_save_to_file(just_ask=False,bytes_to_write=b'',string_to_write='',is_string_to_write=True,ask_address_text='Enter address/name of file to load (q to exit): ',ask_address_text_color='white',on_ask_overwrite_text='This is a file, Overwrite [y/n/q] ? ',on_ask_overwrite_text_color='yellow',on_file_not_have_enough_access_text='File not have enough access to write.',on_file_not_have_enough_access_text_color='red',on_file_not_have_enough_access_sleep_by_sec=1,on_file_is_dir_text='This is a directory. Should be file.',on_file_is_dir_text_color='red',on_file_is_dir_sleep_by_sec=1):
+# 2
+def gpl_ask_save_to_file(ask_address_text='Enter address/name of file to save (q to exit): ', just_ask=False, data=''):
     while True:
-        gpl_clear()
-        address = gpl_input(ask_address_text,ask_address_text_color)
-        if not exists(address):
+        gpl_clear_and_banner()
+        FileName = gpl_input(ask_address_text)
+        if not exists(FileName):
             if just_ask:
-                return address
-            elif is_string_to_write:
-                try:
-                    file = open(address,'w')
-                    file.write(string_to_write)
-                except:
-                    print(colored(on_file_not_have_enough_access_text,on_file_not_have_enough_access_text_color))
-                    gpl_sleep(on_file_not_have_enough_access_sleep_by_sec)
-                else:
-                    file.close()
-                    return
+                return FileName
             else:
-                try:
-                    file = open(address,'wb')
-                    file.write(bytes_to_write)
-                except:
-                    print(colored(on_file_not_have_enough_access_text,on_file_not_have_enough_access_text_color))
-                    gpl_sleep(on_file_not_have_enough_access_sleep_by_sec)
-                else:
-                    file.close()
-                    return
-        elif isdir(address):
-            print(colored(on_file_is_dir_text,on_file_is_dir_text_color))
-            gpl_sleep(on_file_is_dir_sleep_by_sec)
-        elif isfile(address):
-            gpl_clear()
-            choose = gpl_input(on_ask_overwrite_text,on_ask_overwrite_text_color)
-            if choose.lower() == 'y' or choose.lower() == 'yes':
+                gpl_write_to_file(FileName, data)
+        elif isdir(FileName):
+            # FileName is a directory
+            Handler(Error_Levels.Failed_Job, 'This is a directory. Should be file.')
+            gpl_sleep()
+        elif isfile(FileName):
+            # FileName already exists
+            gpl_clear_and_banner()
+            choose = gpl_confirm('This is a file, Overwrite [y/n/q] ? ', default_return_value=False)
+            if choose:
                 if just_ask:
-                    return address
-                elif is_string_to_write:
-                    try:
-                        file = open(address, 'w')
-                        file.write(string_to_write)
-                    except:
-                        print(colored(on_file_not_have_enough_access_text,on_file_not_have_enough_access_text_color))
-                        gpl_sleep(on_file_not_have_enough_access_sleep_by_sec)
-                    else:
-                        file.close()
-                        return
+                    return FileName
                 else:
-                    try:
-                        file = open(address, 'wb')
-                        file.write(bytes_to_write)
-                    except:
-                        print(colored(on_file_not_have_enough_access_text, on_file_not_have_enough_access_text_color))
-                        gpl_sleep(on_file_not_have_enough_access_sleep_by_sec)
-                    else:
-                        file.close()
-                        return
+                    gpl_write_to_file(FileName, data)
+
+
+
 
 # Read from file
 #
@@ -154,58 +93,69 @@ def gpl_ask_save_to_file(just_ask=False,bytes_to_write=b'',string_to_write='',is
 #
 # configs
 # Error_Levels
-# Exit_Codes
 #
 # version
-# 1
-def gpl_read_from_file(File_Name, read_bytes=False, read_lines=False, remove_newlines=True, encoding='UTF-8', show_error=True, on_access_failed_text="Can't read file.", on_access_failed_description_text=None, on_access_failed_return_value=None, on_access_failed_exit_code=None, on_CTRL_C_return_value=None, on_CTRL_C_exit_code=None):
+# 2
+def gpl_read_from_file(FileName, read_bytes=False, read_lines=False, remove_newlines=True, encoding='UTF-8', on_access_failed_text=None, on_access_failed_description_text=None, show_error=True):
     try:
         if read_bytes:
-            file = open(File_Name, 'rb')
+            File = open(FileName, 'rb')
         else:
-            file = open(File_Name, 'r', encoding=encoding)
+            File = open(FileName, 'r', encoding=encoding)
         if read_lines:
-            Lines = file.readlines()
+            Lines = File.readlines()
             if remove_newlines:
                 # remove \n end of lines
                 for i in range(0, len(Lines)):
                     if Lines[i][-1] == "\n":
                         Lines[i] = Lines[i][:-1]
             Content = Lines
-            del Lines
+            del Lines, i
         else:
-            Content = file.read()
-        file.close()
-    except KeyboardInterrupt:
-        if on_CTRL_C_exit_code:
-            Exit_Request(Exit_Codes.CTRL_C)
-        return on_CTRL_C_return_value
-    except:
+            Content = File.read()
+        File.close()
+        return Content
+    except (KeyboardInterrupt, EOFError):
         if show_error:
-            Handler(Error_Levels.High, on_access_failed_text, on_access_failed_description_text)
-        if on_access_failed_exit_code:
-            Exit_Request(on_access_failed_exit_code)
-        return on_access_failed_return_value
-    return Content
+            Handler(Error_Levels.Failed_Job, 'Cant read file. Check file permissions.')
+        Exit_Request(Exit_Codes.CTRL_C, 'Exit with user request.')
+    except:
+        if on_access_failed_text != None:
+            Handler(Error_Levels.Failed_Job, on_access_failed_text, on_access_failed_description_text)
+        return False
+
 
 
 # write to file
 #
 # version
-# 1
-def gpl_write_to_file(File_Name: str, Data, Mode='w', on_access_error_text="Can't write to file!", on_accesss_error_text_description=None):
-    try:
-        File = open(File_Name, Mode)
-        File.write(Data)
-        File.close()
-    except (KeyboardInterrupt, EOFError):
-        return None
-    except:
-        if on_access_error_text:
-            Handler(Error_Levels.High, on_access_error_text, on_accesss_error_text_description)
-        return False
+# 2
+def gpl_write_to_file(FileName: str, data, on_access_error_text='File not have enough access to write.', on_accesss_error_text_description=None):
+    if type(data) == str:
+        # Write string
+        try:
+            File = open(FileName, 'w')
+            File.write(data)
+        except:
+            Handler(Error_Levels.Failed_Job, on_access_error_text, on_accesss_error_text_description)
+            gpl_sleep()
+        else:
+            File.close()
+            return True
+    elif type(data) == bytes:
+        # Write bytes
+        try:
+            File = open(FileName, 'wb')
+            File.write(data)
+        except:
+            Handler(Error_Levels.Failed_Job, on_access_error_text, on_accesss_error_text_description)
+            gpl_sleep()
+        else:
+            File.close()
+            return True
     else:
-        return True
+        raise Exception('Argument called "data" must be string or bytes!')
+
 
 
 # remove file
@@ -214,7 +164,7 @@ def gpl_write_to_file(File_Name: str, Data, Mode='w', on_access_error_text="Can'
 # from os import remove
 #
 # version
-# 1
+# 2
 def gpl_remove_file(FileName):
     try:
         remove(FileName)
@@ -223,16 +173,38 @@ def gpl_remove_file(FileName):
     else:
         return True
 
-# make directory
+
+
+# create directory
 #
 # External:
 # from os import mkdir
 #
 # version
-# 1
-def gpl_mkdir(Address):
+# 2
+def gpl_make_directory(Address):
     try:
         mkdir(Address)
+    except:
+        return False
+    else:
+        return True
+
+
+
+# remove directory
+#
+# External:
+# from shutil import rmtree
+#
+# Note:
+# Directory and all of data will be removed
+#
+# version
+# 2
+def gpl_remove_directory(DirName):
+    try:
+        rmtree(DirName)
     except:
         return False
     else:
