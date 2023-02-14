@@ -11,21 +11,21 @@ from requests import get, post
 # don't manage CTRL+C CTRL+D
 #
 # version
-# 1
-def gpl_http_get(URL, params={}, retry_on_503=True, session=None, retry_to_get_valid_response_and_status_code=True, ok_http_codes=[], timeout=None, cookies={}, headers={}, on_timeout_text=None, on_invalid_http_code_retry_text=None):
+# 2
+def gpl_http_get(URL, params={}, retry_on_503=True, session=None, retry_to_get_valid_response_and_status_code=True, ok_http_codes=[], timeout=None, cookies={}, headers={}, json=None, on_timeout_text=None, on_invalid_http_code_retry_text=None):
     while retry_to_get_valid_response_and_status_code:
         # once get
         try:
             if session:
                 if len(headers) > 0:
-                    response = session.get(URL, params=params, timeout=timeout, cookies=cookies, headers=headers)
+                    response = session.get(URL, params=params, timeout=timeout, cookies=cookies, headers=headers, json=json)
                 else:
-                    response = session.get(URL, params=params, timeout=timeout, cookies=cookies)
+                    response = session.get(URL, params=params, timeout=timeout, cookies=cookies, json=json)
             else:
                 if len(headers) > 0:
-                    response = get(URL, params=params, timeout=timeout, cookies=cookies, headers=headers)
+                    response = get(URL, params=params, timeout=timeout, cookies=cookies, headers=headers, json=json)
                 else:
-                    response = get(URL, params=params, timeout=timeout, cookies=cookies)
+                    response = get(URL, params=params, timeout=timeout, cookies=cookies, json=json)
         except TimeoutError:
             if on_timeout_text:
                 print(on_timeout_text)
@@ -52,27 +52,28 @@ def gpl_http_get(URL, params={}, retry_on_503=True, session=None, retry_to_get_v
 # don't manage CTRL+C CTRL+D
 #
 # version
-# 1
-def gpl_http_post(URL, payload={}, retry_on_503=True, session=None, retry_to_get_valid_response_and_status_code=True, ok_http_codes=[], timeout=None, cookies={}, headers={}, on_timeout_text=None, on_invalid_http_code_retry_text=None):
+# 2
+def gpl_http_post(URL, payload={}, retry_on_503=True, session=None, retry_to_get_valid_response_and_status_code=True, ok_http_codes=[], timeout=None, cookies={}, headers={}, json=None, on_timeout_text=None, on_invalid_http_code_retry_text=None):
     while retry_to_get_valid_response_and_status_code:
         # once get
         try:
             if session:
                 if len(headers) > 0:
-                    response = post(URL, payload=payload, timeout=timeout, cookies=cookies, headers=headers)
+                    response = session.post(URL, data=payload, timeout=timeout, cookies=cookies, headers=headers, json=json)
                 else:
-                    response = post(URL, payload=payload, timeout=timeout, cookies=cookies)
+                    response = session.post(URL, data=payload, timeout=timeout, cookies=cookies, json=json)
             else:
                 if len(headers) > 0:
-                    response = session.post(URL, payload=payload, timeout=timeout, cookies=cookies, headers=headers)
+                    response = post(URL, data=payload, timeout=timeout, cookies=cookies, headers=headers, json=json)
                 else:
-                    response = session.post(URL, payload=payload, timeout=timeout, cookies=cookies)
+                    response = post(URL, data=payload, timeout=timeout, cookies=cookies, json=json)
         except TimeoutError:
             if on_timeout_text:
                 print(on_timeout_text)
             if retry_to_get_valid_response_and_status_code:
                 return False
-        except:
+        except Exception as ex:
+            print(ex)
             return None
         else:
             if len(ok_http_codes) == 0 or response.status_code in ok_http_codes:
