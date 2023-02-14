@@ -16,7 +16,7 @@ def gpl_IPv4_range(start_IP: str, end_IP: str):
     # Create range
     start_IP = IPv4Address(start_IP)
     end_IP = IPv4Address(end_IP)
-    for IP_int in range(int(start_IP), int(end_IP)):
+    for IP_int in range(int(start_IP), int(end_IP) + 1):
         IPs.append(str(IPv4Address(IP_int)))
     # return list of IPs
     return IPs
