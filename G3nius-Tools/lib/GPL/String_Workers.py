@@ -1,6 +1,7 @@
 """     libs    """
 from random import choice
 from json import loads, dumps
+from urllib.parse import unquote, urlencode
 
 """     GPL     """
 
@@ -26,9 +27,16 @@ def gpl_fix_spases(string,lenth,overflow=True,fill_with=' '): # lenth start from
 #
 # version
 # 1
-def gpl_url_encode(string):
-    return string.replace('#', '%23').replace('&', '%26').replace('/', '%2f').replace("\\", '%5C').replace(':', '%3A')
+def gpl_url_encode(params: dict):
+    return urlencode(params)
 
+
+# URL Encode
+#
+# version
+# 1
+def gpl_url_decode(string):
+    return unquote(string)
 
 
 # Random String
