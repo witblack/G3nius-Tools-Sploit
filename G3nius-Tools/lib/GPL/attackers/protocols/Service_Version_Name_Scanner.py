@@ -14,7 +14,7 @@ from lib.GPL.attackers.network.Port_Scanner import gpl_port_scanner
 #
 # version
 # 1
-def gpl_get_server_service_version(IP, Port, more_nmap_argument=''):
+def gpl_find_service_version_name(IP, Port, more_nmap_argument=''):
     Version = gpl_port_scanner(IP, Port=Port, more_nmap_argument='-sV' + more_nmap_argument)
     if Version == None:
         return None
