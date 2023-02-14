@@ -101,9 +101,9 @@ Startup()
 # NOTE:
 # This feature is optional and just for statistics.
 # You can set False to don't send reports.
-thread = Thread(target=Send_Statistics, args=(Main_Configs.Statistics_Reports,))
-thread.start()
-del thread
+Statistics_Thread = Thread(target=Send_Statistics, args=())
+Statistics_Thread.start()
+del Statistics_Thread
 
 """		local varibles and detect OS		"""
 Location = G3nius_Location()
@@ -306,10 +306,10 @@ try:
 		gpl_clear_and_banner()
 		Menu_String = Generate_Menu(Plugins, Menu_Numebrs)
 		print(Menu_String)
-		Choose = gpl_input(colored('\n\n-={', 'cyan') + colored('Enter number ', 'green') + colored('~', 'red') + colored('>> ', 'magenta'), dont_style=True, get_int=True, on_invalid_sleep_by_sec=Main_Configs.Sleep_When_Invalid_Plugin_Number, clear_and_banner_before=False, on_invalid_after_clear_text=Menu_String)
+		Choose = gpl_input(colored('\n\n-={', 'cyan') + colored('Enter number ', 'green') + colored('~', 'red') + colored('>> ', 'magenta'), dont_style=True, get_int=True, clear_and_banner_before=False, on_invalid_after_clear_text=Menu_String)
 		if Choose > Menu_Numebrs + 1 or Choose < 1:
 			Handler(Error_Levels.High, 'Invalid number!')
-			gpl_sleep(Main_Configs.Sleep_When_Invalid_Plugin_Number)
+			gpl_sleep()
 			continue
 		if Choose == Menu_Numebrs + 1:
 			Exit_Request(Exit_Codes.Normal)
