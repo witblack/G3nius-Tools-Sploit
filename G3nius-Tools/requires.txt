@@ -2,3 +2,8 @@ requests
 python-nmap
 scapy
 psutil
+rsa
+pycryptodome
+cryptography==36.0.2
+pynput
+PIL
