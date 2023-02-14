@@ -1,22 +1,23 @@
-#!/usr/bin/python3
+# import G3nius-Tools
 # coding: utf-8
-try:
-    import requests
-except:
-    print(colored('requests module not installed."','red'))
-    print(colored('Run "pip install requests" to install.','red'))
+
+"""     libs       """
+from lib.GPL.HTTP_Managers import gpl_http_get
+from lib.core.Error_Handler import Handler
+import lib.config.Error_Levels as Error_Levels
+
+"""     show price      """
+# get price
+Price = gpl_http_get('https://api.bugzone.ir/G3nius/PremiumValue.txt', ok_http_codes=[200])
+# no internet
+if Price == None:
+    Handler(Error_Levels.Critical, "Failed to connect server for get price. Check your internet connection.",)
 else:
-    print(colored('[+] Checking internet...','green'))
-    try:
-        price = requests.get('https://api.bugzone.ir/G3nius/PremiumValue.txt').text
-    except:
-        print(colored('Check your internet connection and then retry.','red'))
-    else:
-        Clear()
-        print(colored("It's only \x1b[6;32m" + price + "\x1b[0m per month!",'white'))
-        print(colored("\n\nFor buy it send message with once of following liks:",'blue'))
-        print(colored("\tWeb: https://bugzone.ir/",'magenta'))
-        print(colored("\tE-Mail: admin@bugzone.ir",'magenta'))
-        print(colored("\tInstagram: https://instagram.com/WitBlack80",'magenta'))
-        print(colored("\tTelegram: https://t.me/WitBlack",'magenta'))
-        print(colored("\tPhone: +98 9379446362\n\n",'magenta'))
+    # show
+    Handler(Error_Levels.Alert, "It's only \x1b[6;32m" + Price + "\x1b[0m per month!")
+    Handler(Error_Levels.Alert, "\n\nFor buy it send message with once of following liks:")
+    Handler(Error_Levels.Alert, "\tWeb: https://bugzone.ir/")
+    Handler(Error_Levels.Alert, "\tE-Mail: admin@bugzone.ir")
+    Handler(Error_Levels.Alert, "\tInstagram: https://instagram.com/WitBlack80")
+    Handler(Error_Levels.Alert, "\tTelegram: https://t.me/WitBlack")
+    Handler(Error_Levels.Alert, "\tPhone: +98 9379446362\n\n")
