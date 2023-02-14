@@ -1,5 +1,4 @@
 # import G3nius-Tools
-#!/bin/python3
 # coding: utf-8
 
 """     libs      """
