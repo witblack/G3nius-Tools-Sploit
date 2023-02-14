@@ -17,15 +17,15 @@ from lib.GPL.Access_Managers import gpl_check_is_root
 #
 # version
 # 1
-def gpl_set_ipv4_forward_state(on=False):
+def gpl_set_ipv4_forward_state(Active=False):
     if gpl_check_is_root():
-        if on:
+        if Active:
             popen('sysctl -w net.ipv4.ip_forward=1')
-            if gpl_get_ipv4_forward_state_on():
+            if gpl_get_ipv4_forward_state():
                 return True
         else:
             popen('sysctl -w net.ipv4.ip_forward=0')
-            if not gpl_get_ipv4_forward_state_on():
+            if not gpl_get_ipv4_forward_state():
                 return True
     else:
         return None
@@ -41,7 +41,7 @@ def gpl_set_ipv4_forward_state(on=False):
 #
 # version
 # 1
-def gpl_get_ipv4_forward_state_on():
+def gpl_get_ipv4_forward_state():
     if gpl_check_is_root():
         State = gpl_read_from_file('/proc/sys/net/ipv4/ip_forward', show_error=False)
         if State[0] == '1':
