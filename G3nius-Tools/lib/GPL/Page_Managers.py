@@ -19,15 +19,15 @@ Banner_Version = None
 # from termcolor import colored
 #
 # version:
-# 2
-def gpl_clear(clear_on_unsuported_OS=True,on_unsuported_OS_text="New page is here:\n-----------------",on_unsuported_OS_text_color='yellow'):
+# 3
+def gpl_clear(clear_on_unsuported_OS=True,on_unsuported_OS_text="New page is here:\n-----------------"):
     global OS
     if OS == 'Linux':
         print('\033c')
     elif OS == 'Windows':
         print(popen('cls').read())
     elif clear_on_unsuported_OS:
-        print(colored(on_unsuported_OS_text,on_unsuported_OS_text_color))
+        print(colored(on_unsuported_OS_text, 'yellow'))
         print('\033c')
 
 
