@@ -16,5 +16,6 @@ def Exit_Request(Error_Code, clear_and_banner=True, text_after_clear=None, clear
 	# clean tmp folder
 	if clear_tmp_folder:
 		Clean_Temp_Dir(False)
-	print(colored('Good by..', 'magenta'))
+	# exit
+	print(colored('Exiting..', 'magenta'))
 	exit(Error_Code)
