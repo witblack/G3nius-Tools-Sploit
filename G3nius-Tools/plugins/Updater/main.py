@@ -18,7 +18,7 @@ from lib.core.main.Restart_G3nius import Restart_G3nius
 from lib.core.Check_Supported_OS import Check_Supported
 # GPL
 from lib.GPL.HTTP_Managers import gpl_http_get
-from lib.GPL.IO import gpl_input, gpl_sleep, gpl_confirm
+from lib.GPL.IO import gpl_confirm
 from lib.GPL.Page_Managers import gpl_clear_and_banner, gpl_set_banner_verion
 from lib.GPL.File_Workers import gpl_write_to_file
 from lib.GPL.String_Workers import gpl_fix_string_to_uri
@@ -30,7 +30,7 @@ if not Check_Supported(Linux=True):
 
 """		local varibles		"""
 URL = 'https://api.BugZone.ir/G3nius/'
-Plugin_Version = '2.0.6'
+Plugin_Version = '2.0.7'
 Location = G3nius_Location()
 
 # collect data from server
@@ -87,7 +87,7 @@ else:
 				End_Plugin()
 
 			# write to file
-			Result = gpl_write_to_file(Location + '/tmp/UPDATE.zip', Content, Mode='wb')
+			Result = gpl_write_to_file(Location + '/tmp/UPDATE.zip', Content)
 			if Result == False or Result == None:
 				End_Plugin()
 
