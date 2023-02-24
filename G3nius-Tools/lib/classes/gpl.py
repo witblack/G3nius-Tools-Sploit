@@ -17,6 +17,7 @@ from lib.GPL.Command_Managers import *
 from lib.GPL.attackers.macro.Mouse import *
 from lib.GPL.attackers.macro.Screen import *
 from lib.GPL.attackers.macro.Keyboard import *
+from lib.GPL.attackers.macro.ADB import *
 # Cryptography
 from lib.GPL.attackers.cryptography.AES import *
 from lib.GPL.attackers.cryptography.HEX import *
@@ -344,6 +345,121 @@ class gpl:
             class screen:
                 def pixel_color(*args, **keywords):
                     return gpl_screen_pixel_color(*args, **keywords)
+
+            class ADB:
+                def connected_devices():
+                    return gpl_adb_connected_devices()
+
+                def device_information(*args, **keywords):
+                    return gpl_adb_device_information(*args, **keywords)
+
+                def wlan_IP(*args, **keywords):
+                    return gpl_adb_wlan_IP(*args, **keywords)
+
+                def connect_to_IP(*args, **keywords):
+                    return gpl_adb_connect_to_IP(*args, **keywords)
+
+                def disconnect_IP(*args, **keywords):
+                    return gpl_adb_disconnect_IP(*args, **keywords)
+
+                def wifi(*args, **keywords):
+                    return gpl_adb_wifi(*args, **keywords)
+
+                def list_apps(*args, **keywords):
+                    return gpl_adb_list_apps(*args, **keywords)
+
+                def is_rooted(*args, **keywords):
+                    return gpl_adb_is_rooted(*args, **keywords)
+
+                def shell(*args, **keywords):
+                    return gpl_adb_shell(*args, **keywords)
+
+                def install_apk(*args, **keywords):
+                    return gpl_adb_install_apk(*args, **keywords)
+
+                def install_URL_APK(*args, **keywords):
+                    return gpl_adb_install_URL_APK(*args, **keywords)
+
+                def uninstall_app(*args, **keywords):
+                    return gpl_adb_uninstall_app(*args, **keywords)
+
+                def open_app(*args, **keywords):
+                    return gpl_adb_open_app(*args, **keywords)
+
+                def close_app(*args, **keywords):
+                    return gpl_adb_close_app(*args, **keywords)
+
+                def clear_data_app(*args, **keywords):
+                    return gpl_adb_clear_data_app(*args, **keywords)
+
+                def app_info(*args, **keywords):
+                    return gpl_adb_app_info(*args, **keywords)
+
+                def shutdown(*args, **keywords):
+                    return gpl_adb_shutdown(*args, **keywords)
+
+                def reboot(*args, **keywords):
+                    return gpl_adb_reboot(*args, **keywords)
+
+                def kill_server():
+                    return gpl_adb_kill_server()
+
+                def transfer_from_client(*args, **keywords):
+                    return gpl_adb_transfer_from_client(*args, **keywords)
+
+                def transfer_to_client(*args, **keywords):
+                    return gpl_adb_transfer_to_client(*args, **keywords)
+
+                def list_files_folders(*args, **keywords):
+                    return gpl_adb_list_files_folders(*args, **keywords)
+
+                def airplane_mode(*args, **keywords):
+                    return gpl_adb_airplane_mode(*args, **keywords)
+
+                def battery(*args, **keywords):
+                    return gpl_adb_battery(*args, **keywords)
+
+                def netstat(*args, **keywords):
+                    return gpl_adb_netstat(*args, **keywords)
+
+                def volume(*args, **keywords):
+                    return gpl_adb_volume(*args, **keywords)
+
+                def is_screen_on(*args, **keywords):
+                    return gpl_adb_is_screen_on(*args, **keywords)
+
+                def volume_mute_unmute(*args, **keywords):
+                    return gpl_adb_volume_mute_unmute(*args, **keywords)
+
+                def run_keycode(*args, **keywords):
+                    return gpl_adb_run_keycode(*args, **keywords)
+
+                def open_browser(*args, **keywords):
+                    return gpl_adb_open_browser(*args, **keywords)
+
+                def change_screen_status(*args, **keywords):
+                    return gpl_adb_change_screen_status(*args, **keywords)
+
+                def lock_screen(*args, **keywords):
+                    return gpl_adb_lock_screen(*args, **keywords)
+
+                def screenshot(*args, **keywords):
+                    return gpl_adb_screenshot(*args, **keywords)
+
+                def list_processes(*args, **keywords):
+                    return gpl_adb_list_processes(*args, **keywords)
+
+                def extract_contacts(*args, **keywords):
+                    return gpl_adb_extract_contacts(*args, **keywords)
+
+                def extract_SMS(*args, **keywords):
+                    return gpl_adb_extract_SMS(*args, **keywords)
+
+                def keyboard_type(*args, **keywords):
+                    return gpl_adb_keyboard_type(*args, **keywords)
+
+                def tcp_IP(*args, **keywords):
+                    return gpl_adb_tcp_IP(*args, **keywords)
 
 
         # Protocols
