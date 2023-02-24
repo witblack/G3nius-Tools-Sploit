@@ -19,19 +19,19 @@ import lib.config.Error_Levels as Error_Levels
 
 
 # Set plugin version
-gpl_set_banner_verion('2.0.0')
+gpl_set_banner_verion('2.0.1')
 
 # Show menu
 Options = ['MD5', 'SHA-1', 'SHA-224', 'SHA3-224', 'SHA-256', 'SHA3-256', 'SHA-384', 'SHA3-384', 'SHA-512', 'SHA3-512', 'XOR (Without Brute Force)']
 Choose = gpl_while_input('Select a algorithm to decode: ', Options)
 
 
-# Verbos ?
-Verbos = gpl_confirm('Run as verbus', True)
-if Verbos.lower() == 'y' or Verbos.lower() == 'yes':
-    Verbos = True
+# Verbose ?
+Verbose = gpl_confirm('Run as Verbose', True)
+if Verbose.lower() == 'y' or Verbose.lower() == 'yes':
+    Verbose = True
 else:
-    Verbos = False
+    Verbose = False
 
 # if be type of hash
 if Choose <= 10:
@@ -48,7 +48,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "MD5 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 2:
         # SHA-1
@@ -57,7 +57,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA1 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 3:
         # SHA-224
@@ -66,7 +66,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA224 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 4:
         # SHA3-224
@@ -75,7 +75,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA3-224 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 5:
         # SHA-256
@@ -84,7 +84,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA256 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 6:
         # SHA3-256
@@ -93,7 +93,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA3_256 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 7:
         # SHA-384
@@ -102,7 +102,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA384 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 8:
         # SHA3-384
@@ -111,7 +111,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA3_384 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 9:
         # SHA-512
@@ -120,7 +120,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA512 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     elif Choose == 10:
         # SHA3-512
@@ -129,7 +129,7 @@ if Choose <= 10:
                 Handler(Error_Levels.Alert, "SHA3-512 hash found !", "Value: " + Password)
                 Found = True
                 break
-            elif Verbos:
+            elif Verbose:
                 Handler(Error_Levels.Failed_Job, 'Testing "' + Password + '" ...')
     # If not found
     if not Found:

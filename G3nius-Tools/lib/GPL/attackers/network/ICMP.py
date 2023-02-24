@@ -5,7 +5,7 @@ from scapy.all import IP, ICMP, sr, conf
 # internal
 import lib.config.GPL as GPL_Config
 
-# disabe verbos
+# disabe verbose
 conf.verb = 0
 
 # send and recv icmp
