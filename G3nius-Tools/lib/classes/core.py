@@ -21,6 +21,9 @@ from lib.core.main.Clean_Temp_Dir import Clean_Temp_Dir
 from lib.core.installers.check import Check_Installtion_G3nius
 from lib.core.installers.installer_uninstaller import Install_G3nius, Uninstall_G3nius
 
+"""     FACADE    """
+import lib.config.Error_Levels as Error_Levels
+
 
 """     class       """
 class core:
