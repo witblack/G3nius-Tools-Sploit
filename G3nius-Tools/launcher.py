@@ -38,11 +38,16 @@ try:
 	from importlib import reload
 	from nmap import PortScanner
 	from psutil import Process
-except:
+	from rsa import newkeys
+	from pynput.mouse import Button
+	from PIL import ImageGrab
+	from adbutils import device
+except ModuleNotFoundError as EX:
 	# failed to load external
 	try:
 		print(colored('[!] ', 'red') + colored('Some depends not installed.', 'yellow'))
-		print(colored('Run as root/administrator: "pip install -r requires.txt"', 'blue'))
+		print(colored("[*] ", 'red') + colored('Module name: ', 'magenta') + colored(EX.name, 'white'))
+		print(colored('\nRun this command as root/administrator: "', 'cyan') + 'pip install -r requires.txt' + colored('"', 'cyan'))
 	except:
 		print('\x1b[0;31m[!] ERROR:    Internal "termcolor" package damaged :(\x1b[0m')
 	exit(1)
