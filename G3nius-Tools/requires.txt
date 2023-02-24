@@ -6,4 +6,5 @@ rsa
 pycryptodome
 cryptography==36.0.2
 pynput
-PIL
+pillow
+adbutils
