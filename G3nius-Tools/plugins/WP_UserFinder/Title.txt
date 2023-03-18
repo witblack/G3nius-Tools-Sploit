@@ -1,1 +1,1 @@
-Wordpress username/type/information finder(no BruteForce,BruteForce).
+Wordpress username/E-mail/info finder (no BruteForce,BruteForce).
