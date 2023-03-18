@@ -12,3 +12,4 @@ AirCrack_More_Arguments_Fake_Packet = '--ignore-negative-one'
 SSH_Timeout = 10  # sec
 Encoding = 'utf-8'
 Macro_Apply_Time = 0.0001
+Wordpress_Theme_Path = '/wp-content/themes/'
