@@ -24,11 +24,10 @@ import lib.config.Exit_Codes as Exit_Codes
 # gpl_sleep
 #
 # version:
-# 2
+# 3
 def gpl_ask_load_from_file(ask_address_text='Enter address/name of file to load (q to exit): ', just_ask=False, read_lines=False, read_content=False, read_bytes=False):
     while True:
         # Get URI from user
-        gpl_clear_and_banner()
         FileName = gpl_input(ask_address_text)
         if not exists(FileName):
             # file not exists
@@ -37,12 +36,12 @@ def gpl_ask_load_from_file(ask_address_text='Enter address/name of file to load 
         elif isfile(FileName):
             if just_ask:
                 return FileName
-            elif read_content:
-                return gpl_read_from_file(FileName)
             elif read_lines:
                 return gpl_read_from_file(FileName, read_lines=True)
             elif read_bytes:
                 return gpl_read_from_file(FileName, read_bytes=True)
+            else:
+                return gpl_read_from_file(FileName)
         else:
             # Selected URI is directory
             Handler(Error_Levels.Failed_Job, "It's a directory. should be a file.")
@@ -67,7 +66,7 @@ def gpl_ask_save_to_file(ask_address_text='Enter address/name of file to save (q
             if just_ask:
                 return FileName
             else:
-                gpl_write_to_file(FileName, data)
+                return gpl_write_to_file(FileName, data)
         elif isdir(FileName):
             # FileName is a directory
             Handler(Error_Levels.Failed_Job, 'This is a directory. Should be file.')
@@ -80,7 +79,7 @@ def gpl_ask_save_to_file(ask_address_text='Enter address/name of file to save (q
                 if just_ask:
                     return FileName
                 else:
-                    gpl_write_to_file(FileName, data)
+                    return gpl_write_to_file(FileName, data)
 
 
 
@@ -129,12 +128,15 @@ def gpl_read_from_file(FileName, read_bytes=False, read_lines=False, remove_newl
 # write to file
 #
 # version
-# 2
-def gpl_write_to_file(FileName: str, data, on_access_error_text='File not have enough access to write.', on_accesss_error_text_description=None):
+# 3
+def gpl_write_to_file(FileName: str, data, append=False, on_access_error_text='File not have enough access to write.', on_accesss_error_text_description=None):
     if type(data) == str:
         # Write string
         try:
-            File = open(FileName, 'w')
+            if append:
+                File = open(FileName, 'a')
+            else:
+                File = open(FileName, 'w')
             File.write(data)
         except:
             Handler(Error_Levels.Failed_Job, on_access_error_text, on_accesss_error_text_description)
@@ -145,7 +147,10 @@ def gpl_write_to_file(FileName: str, data, on_access_error_text='File not have e
     elif type(data) == bytes:
         # Write bytes
         try:
-            File = open(FileName, 'wb')
+            if append:
+                File = open(FileName, 'ab')
+            else:
+                File = open(FileName, 'wb')
             File.write(data)
         except:
             Handler(Error_Levels.Failed_Job, on_access_error_text, on_accesss_error_text_description)
