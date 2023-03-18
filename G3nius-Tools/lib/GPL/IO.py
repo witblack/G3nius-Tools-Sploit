@@ -33,7 +33,7 @@ from lib.config.Main_Configs import Default_Sleep_Time
 #
 # version:
 # 2
-def gpl_input(text: str, dont_style=False, clear_and_banner_before=True, on_invalid_after_clear_text=None, clear_before=False, q_to_exit=True, clear_and_banner_when_exit=True, clear_when_exit=False, get_int=False, get_URL=False, get_float=False, get_port=False, get_ip=False, get_MAC=False, on_invalid_clear_and_banner=True):
+def gpl_input(text: str, dont_style=False, clear_and_banner_before=True, on_invalid_after_clear_text=None, clear_before=False, q_to_exit=True, clear_and_banner_when_exit=True, clear_when_exit=False, get_int=False, get_URL=False, get_float=False, get_port=False, get_ip=False, get_MAC=False, get_plus_number=False, on_invalid_clear_and_banner=True):
     if clear_and_banner_before and (not clear_before):
         gpl_clear_and_banner()
     elif clear_before:
@@ -63,7 +63,7 @@ def gpl_input(text: str, dont_style=False, clear_and_banner_before=True, on_inva
                             print(on_invalid_after_clear_text)
                     else:
                         return choose
-                elif get_int or get_port:
+                elif get_int or get_port or get_plus_number:
                     try:
                         choose = int(choose)
                     except:
@@ -79,6 +79,11 @@ def gpl_input(text: str, dont_style=False, clear_and_banner_before=True, on_inva
                                 return choose
                             else:
                                 Handler(Error_Levels.High, 'Invalid port number, can be range of 1-65535')
+                        elif get_plus_number:
+                            if choose > 0:
+                                return choose
+                            else:
+                                Handler(Error_Levels.High, "Number can't be <= 0, Enter a plus number.")
                         else:
                             return choose
                 elif get_ip:
