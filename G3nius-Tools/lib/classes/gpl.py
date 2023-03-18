@@ -47,6 +47,8 @@ from lib.GPL.attackers.signals.IEEE_802_11_WiFi.Monning import *
 from lib.GPL.attackers.signals.IEEE_802_11_WiFi.Scanning import *
 from lib.GPL.attackers.signals.IEEE_802_11_WiFi.Fake_Packet import *
 from lib.GPL.attackers.signals.IEEE_802_11_WiFi.Check_Requirements import *
+# Web
+from lib.GPL.attackers.web.CMS.Wordpress import *
 
 
 """     FACADE      """
@@ -92,7 +94,7 @@ class gpl:
             return gpl_http_post(*args, **keywords)
 
     # String workers
-    class strings:
+    class string_managers:
         def fix_spases(*args, **keywords):
             return gpl_fix_spases(*args, **keywords)
 
@@ -460,6 +462,13 @@ class gpl:
 
                 def tcp_IP(*args, **keywords):
                     return gpl_adb_tcp_IP(*args, **keywords)
+
+
+        # Web
+        class web:
+            class CMS:
+                def wordpress_exists(*args, **keywords):
+                    return gpl_wordpress_exists(*args, **keywords)
 
 
         # Protocols
