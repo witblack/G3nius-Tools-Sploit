@@ -27,8 +27,13 @@ def gpl_fix_spases(string,lenth,overflow=True,fill_with=' '): # lenth start from
 #
 # version
 # 1
-def gpl_url_encode(params: dict):
-    return urlencode(params)
+def gpl_url_encode(str_or_params):
+    if type(str_or_params) == dict:
+        return urlencode(str_or_params)
+    elif type(str_or_params) == str:
+        return urlencode({'': str_or_params})[1:]
+    else:
+        raise Exception("URL encode input should be str or dict.")
 
 
 # URL Encode
@@ -92,10 +97,10 @@ def gpl_convert_to_bytes(data):
 # from json import loads
 #
 # version:
-# 1
+# 2
 def gpl_JSON_loads(JSON_String):
     try:
-        loads(JSON_String)
+        return loads(JSON_String)
     except:
         return None
 
@@ -106,9 +111,9 @@ def gpl_JSON_loads(JSON_String):
 # from json import dumps
 #
 # version:
-# 1
+# 2
 def gpl_JSON_dumps(JSON_String):
     try:
-        dumps(JSON_String)
+        return dumps(JSON_String)
     except:
         return None
