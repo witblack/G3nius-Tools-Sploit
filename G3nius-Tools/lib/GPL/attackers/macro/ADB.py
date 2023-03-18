@@ -75,8 +75,7 @@ def gpl_adb_device_information(device):
 def gpl_adb_wlan_IP(device):
     try:
         IP = device.wlan_ip()
-    except Exception as ex:
-        print(ex)
+    except:
         return None
     else:
         return IP
@@ -334,6 +333,9 @@ def gpl_adb_transfer_to_client(device, path: str, destination: str):
 
 # Get list of files and directory
 #
+# Simple return:
+# [ FileInfo(mode=16877, size=4096, mtime=datetime.datetime(2008, 12, 31, 18, 30), name='odm') , .. ]
+#
 # version:
 # 1
 def gpl_adb_list_files_folders(device, path: str):
@@ -433,8 +435,8 @@ def gpl_adb_open_browser(device, URL: str):
 #
 # version:
 # 1
-def gpl_adb_change_screen_status(device, status=True):
-    device.switch_screen(status)
+def gpl_adb_change_screen_status(device, screen_on=True):
+    device.switch_screen(screen_on)
 
 
 
@@ -463,7 +465,7 @@ def gpl_adb_lock_screen(device):
 def gpl_adb_screenshot(device, destination_png):
     content = gpl_adb_shell(device, 'screencap -p | base64')
     content = gpl_base64_decode(content)
-    gpl_write_to_file(destination_png, content)
+    return gpl_write_to_file(destination_png, content)
 
 
 
@@ -477,8 +479,12 @@ def gpl_adb_screenshot(device, destination_png):
 #
 # version:
 # 1
-def gpl_adb_list_processes(device):
-    return gpl_adb_shell(device, 'ps -ef').split("\n")[1:]
+def gpl_adb_list_processes(device, return_list=True):
+    Output = gpl_adb_shell(device, 'ps -ef')
+    if return_list:
+        return Output.split("\n")[1:]
+    else:
+        return Output
 
 
 
@@ -489,7 +495,7 @@ def gpl_adb_list_processes(device):
 #
 # version:
 # 1
-def gpl_adb_extract_contacts(device, return_list=False):
+def gpl_adb_extract_contacts(device, return_list=True):
     Contacts = gpl_adb_shell(device, 'content query --uri content://contacts/phones/  --projection display_name:number:notes')
     # Fix on new Android versions
     if Contacts == 'No result found.':
@@ -513,7 +519,7 @@ def gpl_adb_extract_contacts(device, return_list=False):
 #
 # version:
 # 1
-def gpl_adb_extract_SMS(device, return_list=False):
+def gpl_adb_extract_SMS(device, return_list=True):
     SMSs = gpl_adb_shell(device, 'content query --uri content://sms/ --projection _id:address:date:body')
     if return_list:
         SMSs = "\n" + SMSs
