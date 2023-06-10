@@ -12,7 +12,12 @@ Once of own targets is being user-friendly and powerful concurrently. So that is
 <p dir="auto" style="text-align: left;">Click on Download text to start download. Then create an empty directory and extract downloaded zip file at same directory.</p>
 <p style="text-align: left;"><a href="https://api.bugzone.ir/G3nius/Lastest.zip" rel="nofollow">Download latest stable version here</a></p>
 Also, you can find <a href="https://github.com/witblack/G3nius-Tools-Sploit/releases">other version of releases at here</a>
-<br/><br/><h3>Step 3 - Run as installed or portable</h3>
+<br/><br/>
+<h3 dir="auto">Step 3 - Install requirements dependencies</h3>
+<p dir="auto" style="text-align: left;">G3nius Tools Sploit need some depends to run on your system, So you shouild install needed modules on your systems. Run as privilege user:</p>
+<p dir="auto"><code>pip3 install -r requires.txt</code></p>
+<br/>
+<br/><h3>Step 4 - Run as installed or portable</h3>
 Afterward extract files, find 'launcher.py' file and run it. Consequently, on Linux/BSD based systems you should run this file like <code>./launcher.py</code> and on Windows systems you just need to double-click on this file.
 Enjoy your hacking experience!
 <h1 dir="auto" style="text-align: left;"></h1>
