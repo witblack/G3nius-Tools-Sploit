@@ -3,7 +3,15 @@
 
 <h1 dir="auto" style="text-align: left;"><a href="https://camo.githubusercontent.com/5bbf8ca61ef5f92684489ace45ad6f45984fff87a621040c62b1fe31e3005ff9/687474703a2f2f692e696d6775722e636f6d2f436a34724d72532e676966" target="_blank" rel="noopener noreferrer nofollow" data-target="animated-image.originalLink"><img title="We Are G3nius !" src="https://camo.githubusercontent.com/5bbf8ca61ef5f92684489ace45ad6f45984fff87a621040c62b1fe31e3005ff9/687474703a2f2f692e696d6775722e636f6d2f436a34724d72532e676966" alt="G3nius Tools" height="40" data-canonical-src="http://i.imgur.com/Cj4rMrS.gif" data-target="animated-image.originalImage" /></a></h1>
 <br/>
-<h2 dir="auto" style="text-align: left;">How to download and run easily?</h2>
+<h2 dir="auto" style="text-align: left;">How to download and run easily? (Installation guide for beginners)</h2>
+Docker version is a way to run G3nius Tools Sploit easily. But it's contain some limits. You can't do hardware attacks on Dockerized version (Like IEEE802.11 DDOS signal attack, LED control of Linux, etc…). But this version is very helpful and tested. Version of depends libraries controlled and all of published versions are successfully tested. This operate <br/><br/>
+<h3>Dockerize version on Linux command:</h3>
+<code>sudo apt update && sudo apt install docker.io -y && sudo docker run -it witblack/g3nius-tools-sploit</code><br/><br/>
+If you don't use a Debian based Linux operating system. You should <a href="https://docs.docker.com/engine/install/">install Docker</a> first, then run:<br/>
+<code>docker run -it witblack/g3nius-tools-sploit</code><br/>
+<h3>Dockerize version on Windows:</h3>
+On Windows operating systems, You should install Docker on your Windows first. Then pull and run <code>witblack/g3nius-tools-sploit</code> package name.<br/><br/><br/>
+<h2 dir="auto" style="text-align: left;">How to full install G3nius Tools Sploit on your Server/PC? (Advanced installation)</h2>
 Once of own targets is being user-friendly and powerful concurrently. So that is really simple. Follow these 3 Steps.
 <br/><br/><h3 dir="auto">Step 1 - Download and install Python3:</h3>
 <p dir="auto" style="text-align: left;">At first, download and install python3 from <a href="https://www.python.org/downloads/">Python.org</a>. Although actually Python3 installed as default at Linux operating systems, you can install manually with following command:</p>
