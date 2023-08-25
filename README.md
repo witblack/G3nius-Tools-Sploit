@@ -10,7 +10,14 @@ Docker version is a way to run G3nius Tools Sploit easily. But it's contain some
 If you don't use a Debian based Linux operating system. You should <a href="https://docs.docker.com/engine/install/">install Docker</a> first, then run:<br/>
 <code>docker run -it witblack/g3nius-tools-sploit</code><br/>
 <h3>Dockerize version on Windows:</h3>
-On Windows operating systems, You should <a href="https://docs.docker.com/desktop/install/windows-install/">install Docker on your Windows<a/> first. Then pull and run <code>witblack/g3nius-tools-sploit</code> package name.<br/><br/><br/>
+On Windows operating systems, You should <a href="https://docs.docker.com/desktop/install/windows-install/">install Docker on your Windows<a/> first. Then pull and run <code>witblack/g3nius-tools-sploit</code> package name.<br/>
+<h3>Docker compose:</h3>
+If you know how to work with docker-compose, you can use the following contents as a docke-compose.yaml file:
+<br/><code>version: "3"
+services:
+  g3nius-tools-sploit:
+    image: witblack/g3nius-tools-sploit:latest
+    network_mode: "host"</code><br/><br/><br/>
 <h2 dir="auto" style="text-align: left;">How to full install G3nius Tools Sploit on your Server/PC? (Advanced installation)</h2>
 Once of own targets is being user-friendly and powerful concurrently. So that is really simple. Follow these 3 Steps.
 <br/><br/><h3 dir="auto">Step 1 - Download and install Python3:</h3>
