@@ -6,9 +6,9 @@
 <h2 dir="auto" style="text-align: left;">How to download and run easily? (Installation guide for beginners)</h2>
 Docker version is a way to run G3nius Tools Sploit easily. But it's contain some limits. You can't do hardware attacks on Dockerized version (Like <a href="https://en.wikipedia.org/wiki/IEEE_802.11">IEEE802.11<a/> DDOS signal attack, LED control of Linux, etc…). But this version is very helpful and tested. Version of depends libraries controlled and all of published versions are successfully tested. This operation can be taking time for first time and use about 250 Mb of your internet.<br/><br/>
 <h3>Dockerize version on Linux command:</h3>
-<code>sudo apt update && sudo apt install docker.io -y && sudo docker run --network host -v /dev:/dev -v /sys:/sys -v /proc:/proc -it witblack/g3nius-tools-sploit</code><br/><br/>
+<code>sudo apt update && sudo apt install docker.io -y && sudo docker run --privileged -v $HOME/.Xauthority:/root/.Xauthority:rw -v /dev:/dev -v /proc:/proc -v /sys:/sys -e DISPLAY=$DISPLAY --network host -it witblack/g3nius-tools-sploit</code><br/><br/>
 If you don't use a Debian based Linux operating system. You should <a href="https://docs.docker.com/engine/install/">install Docker</a> first, then run:<br/>
-<code>docker run --network host -v /dev:/dev -v /sys:/sys -v /proc:/proc -it witblack/g3nius-tools-sploit</code><br/>
+<code>sudo docker run --privileged -v $HOME/.Xauthority:/root/.Xauthority:rw -v /dev:/dev -v /proc:/proc -v /sys:/sys -e DISPLAY=$DISPLAY --network host -it witblack/g3nius-tools-sploit</code><br/>
 <h3>Dockerize version on Windows:</h3>
 On Windows operating systems, You should <a href="https://docs.docker.com/desktop/install/windows-install/">install Docker on your Windows<a/> first. Then pull and run <code>witblack/g3nius-tools-sploit</code> package name.<br/>
 <h3>Docker compose:</h3>
